@@ -1,0 +1,1 @@
+Esta carpeta posee la versión del TP que se le entrega a la cátedra.  Para una versión de desarrollo como así también informacion necesaria para el desarrollo del TP, ver la carpeta "Desarrollo".
