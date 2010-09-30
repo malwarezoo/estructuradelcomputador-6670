@@ -1,0 +1,26 @@
+/* CSS placed here will affect the print output */
+
+.ns-0 .ambox, .ns-104 .ambox,
+.ns-0 .navbox, .ns-104 .navbox,
+.ns-0 .infobox.sisterproject, .ns-104 .infobox.sisterproject,
+.ns-0 .dablink, .ns-104 .dablink,
+.ns-0 .metadata, .ns-104 .metadata,
+#privacy, #about, #disclaimer, #contentSub, .editlink,
+span.collapseButton, a.NavToggle,
+.noprint {
+    display: none;
+}
+
+/* Add formatting to make sure that "external references" from templates
+   like [[Template:Ref]] do not get URL expansion, not even when printed.
+   The anchor itself has class "external autonumber" and the url expansion
+   is inserted when printing (see the common printing style sheet at
+   http://en.wikipedia.org/skins-1.5/common/commonPrint.css) using the
+   ":after" pseudo-element of CSS. Also hide in <cite> elements.
+*/
+
+#content cite a.external.text:after,
+.nourlexpansion a.external.text:after,
+.nourlexpansion a.external.autonumber:after {
+    display: none !important;
+}

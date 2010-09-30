@@ -1,0 +1,1 @@
+GA_googleSetAdSlotAttributes({"728x90Footer":{"_width_":728,"_height_":90,"_expandable_":true,"_enabled_":false}});
