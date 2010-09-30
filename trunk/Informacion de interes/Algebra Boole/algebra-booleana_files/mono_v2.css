@@ -1,0 +1,1080 @@
+@charset "utf-8";
+
+/*
+
+Monografias.com - Estilos CSS
+Daniela Rodriguez Careri <dcareri@gmail.com>
+
+Changelog:
+
+02/abr/2009 - 1.5.1 Cambiado ancho a 960px, incorporada grilla y mejoras en perfiles
+12/mar/2009 - 1.5.0 Unificado con v2-cambios. Introducidas mejoras de sprint
+03/oct/2008 - Cambios en header
+25/jun/2008 - Fix Safari y Firefox 3
+21/ago/2007 - Relacionados y hilite
+25/abr/2007 - Replanteados varios estilos por nuevo ancho de contenido.
+
+2009 -------> Cambios generales en todo el sitio. Actualizaciones.
+
+22/dic/2009 - Agregados estilos de templates e-books de Liso.
+
+*/
+
+
+@import url(mono_v2-common.css);
+
+/***********************************************************************************************************/
+/* TAGS HTML
+/***********************************************************************************************************/
+
+
+html { margin:0; padding:0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size:12px; line-height:16px;
+	background: #DDEDF8;  color: #455; margin: 0px; padding: 0px; border:0px; }
+
+body.iframe {background:#fff;}
+
+table, td { font-size:12px; line-height:16px; color: #455;}
+abbr, acronym, .abbr {border: 0; cursor: help;}
+img { border:0 }
+a img { border-width:0;}
+h1,h2,h3,p,blockquote, form {margin:0; padding:0}
+h1 { font-size: 26px; line-height:normal; font-weight: normal; margin-top:5px; letter-spacing:-1px;margin-bottom:8px;}
+h2 { font-size: 24px; line-height:normal; font-weight: normal; letter-spacing:-1px; margin-bottom:6px;}
+h3 { font-size: 15px; line-height:normal; font-weight: bold; margin-bottom:3px;}
+h1,h2,h3 {color:#000; }
+p { margin: 3px 0px 3px 0px; padding: 0px; } 
+hr { height:1px; border:0; color:#999; background: #999;}
+ul { margin-top: 5px; margin-left: 0px; padding-left:15px; margin-bottom:5px }
+ol { margin-top: 5px; margin-left: 23px; padding-left:5px; margin-bottom:5px }
+li { margin-top: 0px; margin-left: 0px; padding-left:0px;  }
+form { display: inline; color: #333; } 
+
+/* http://sonspring.com/journal/clearing-floats */
+
+html body * span.clear, html body * div.clear, html body * li.clear, html body * dd.clear
+	{ background: none; border: 0; clear: both; display: block;	float: none; font-size: 0;
+	list-style: none; margin: 0; padding: 0; overflow: hidden; visibility: hidden; width: 0; height: 0;}
+
+/* http://www.positioniseverything.net/easyclearing.html */
+
+.clearfix:after { clear: both; content: '.'; display: block; visibility: hidden; height: 0;}
+.clearfix {	display: inline-block;}
+* html .clearfix { height: 1%;}
+.clearfix { display: block;}
+
+
+/***********************************************************************************************************/
+/* ESTILOS
+/***********************************************************************************************************/
+
+/* #0248B0:	azul */
+/* #0886c8:	azul claro */
+/* #DDEDF8:	celeste claro */
+/* #566:	gris */ 
+/* #455:	gris oscuro*/ 
+/* #a00:	rojo */
+
+
+
+.destacada {color:#FFF;}	
+.destacada h1, .destacada h2, .destacada h3 {color:#FFF;}
+.cajita h2,
+.cb h2,
+.cajita2 h2,
+#Blog h2 { font-size: 15px; line-height:normal; font-weight: bold; margin-bottom:3px; letter-spacing:normal}
+.titulo { font-family: Georgia, "Times New Roman", Times, serif; color:#a00; font-weight: normal} /* rojo */
+.in-title {font-size:70%; color:#888;}
+
+.secundario {font-size:11px; line-height: 14px; color:#566; font-family:Tahoma, "Free Serif", Lucida Grande, Lucida Sans Unicode; } 
+.indentado {margin-left: 10px; display:block;}
+.advertencia {padding: 2px 10px; border: 1px solid; border-color: #aaa #ffc; background-color:#FFC!important;}
+
+.serif {font-family:Georgia,"Times New Roman",Times,serif; font-size:14px; line-height:18px;}
+.comando {font-family: Arial, Helvetica, sans-serif; font-size:12px; line-height:16px;}
+img.bigavatar {border:solid 3px #eee; padding:2px; background-color:#fff; -ms-interpolation-mode: bicubic; }
+
+.Monografia {font-family: Georgia, "Times New Roman", Times, serif; font-size:14px; line-height:18px; background-color: #FFF; }
+.Monografia h2 {font-size:18px; line-height: normal; letter-spacing:normal; font-weight:bold; color: #455;}
+.Monografia h3 {font-size:14px; line-height: normal; letter-spacing:normal; font-weight:bold; color: #455;}
+.Monografia p {margin: 9px 0 9px 0; background-color: #FFF;}
+.Monografia ul {margin-left:20px}
+.Monografia ol {margin-left:35px; margin-bottom:20px; background-color: #FFF;}
+.Monografia table, .Monografia td { border:1px solid #aaa;}
+.Monografia th {border:1px solid #aaa; background-color:#F4F4F4;}
+.Monografia td, .Monografia th {padding:2px;}
+
+#Excepcion { border:none;}
+.Relacionado table, .Relacionado td { border:0px;}
+.Relacionado th {border:0px ; background-color:#F4F4F4;}
+.Relacionado td, .Relacionado th {padding:0px;}
+
+/* Links */
+
+a:link,
+a:visited 	{ color: #0248B0;} /*azul*/
+a:hover		{ color: #FFF; text-decoration: none; background: #0248B0;} /*azul*/
+a:active	{ color: #FFF; text-decoration: none; background: #0248B0; } /*azul*/
+
+.destacada a:link,
+.destacada a:visited 	{ color: #FFF;} 
+.destacada a:hover		{ color: #0248B0; text-decoration: none; background: #FFF;} /*azul*/
+.destacada a:active		{ color: #FFF; text-decoration: none; background: #0248B0; } /*azul*/
+
+.secundario a:link,
+.secundario a:visited 	{ text-decoration: none;} 
+
+.titulo a:link,
+.titulo a:visited 	{ color: #a00;} /*rojo*/
+.titulo a:hover		{ color: #FFF; text-decoration: none; background: #0248B0;} /*azul*/
+.titulo a:active	{ color: #FFF; text-decoration: none; background: #0248B0; } /*azul*/
+
+a.autolink:link,
+a.autolink:visited	{ text-decoration: none; color: #008040; /*verde*/
+					border-bottom-width: 1px; border-bottom-color: #336600;}
+a.autolink:hover	{text-decoration:underline; color: #0248B0; background-color:transparent;}
+
+a.gadsense:link,
+a.gadsense:visited	{ text-decoration: none; color: #aa0000; /*rojo-azul era 0248B0*/
+					border-bottom-width: 1px; border-bottom-color: #336600;}
+a.gadsense:hover	{text-decoration:underline; color: #0248B0; background-color:transparent;}
+
+/* ----------------------------------- CUSTOM ADSENSE ------------------------------------- */
+
+.custom_adsense {line-height:1.5; margin-bottom:5px; width:580px;}
+.custom_adsense p.ca_provider { font-size:10px; color:#888!important; margin:0; padding:0;}
+.custom_adsense p.ca_provider a {text-decoration:none!important; color:#888!important; line-height:1.5!important; }
+.custom_adsense p.ca_provider a:hover {background:none!important; }
+.custom_adsense p.ca_ad {margin:5px 0; padding:0;}
+.custom_adsense a.ca_title {font-size:13px; padding:0; font-weight:bold;}
+.custom_adsense a.ca_title:hover {background-color:#0248B0; color:#FFFFFF;text-decoration:none;}
+.custom_adsense span.ca_url {font-size:10px; color:#888; }
+.custom_adsense span.ca_url a {text-decoration:none!important;}
+.custom_adsense span.ca_url a:hover {background-color:#0248B0; color:#FFFFFF;text-decoration:none;}
+
+.custom_adsense.encolumnado1 p.ca_ad {width:199px; float:left; margin-right:10px;}
+
+
+
+/* log de actividades */
+
+ul.activity_log { margin:13px 0; padding:0; list-style:none;}
+ul.activity_log li { margin:0 10px 10px 0; padding:0; position:relative; list-style:none;}
+ul.activity_log li .col1 { width:90px; float:left; text-align:right; padding-right:20px;
+	background:transparent url(/img/bkg_comm.gif) right 8px no-repeat;  }
+ul.activity_log li .col2 { margin-left:110px; padding:5px 8px; background-color:#f4f4f4;
+	border-bottom: solid 1px #e3e3e3; border-right: solid 1px #e3e3e3;}
+ul.activity_log li .col2 p {margin-top:0; }
+ul.activity_log li .col2 p.meta {margin-top:2px; }
+ul.activity_log li .cerrar {position:absolute; top:7px; right:7px; cursor:pointer;}
+ul.activity_log li a.username,
+ul.activity_log li a.username:link
+ul.activity_log li a.username:visited,
+ul.activity_log li .username {color:#a00; font-weight:bold; text-decoration:none;}
+ul.activity_log li a.username:hover {color:#fff; background-color:#a00;}
+
+
+/* menu vertical */
+
+ul.menu-vertical { margin:0; padding:0; list-style:none; font-weight:normal; height:500px; background:url(/img/bkg_tabbg.gif) right top no-repeat;}
+ul.menu-vertical li { margin:0; padding:0; float:left; width:170px; }
+ul.menu-vertical li a { text-decoration:none!important; padding:0.93em 0.8em; color:#455!important;
+	display:block; margin:0; font-size:15px; font-weight:bold;
+	background:#ebf6fd url(/img/bkg_tab1.gif) left bottom no-repeat; }
+ul.menu-vertical li a:hover,
+ul.menu-vertical li a:active { background:#f3fafe url(/img/bkg_tab3.gif) left bottom no-repeat; color:#455;}
+ul.menu-vertical li.actual a { display:block; background:#fff url(/img/bkg_tab2.gif) left bottom no-repeat;   }
+ul.menu-vertical li.actual a:hover { color:#455; background:#fff url(/img/bkg_tab2.gif) left bottom no-repeat; }
+ul.menu-vertical li.separador { padding:0; height:1px;}
+
+/* listado de monos, gradualmente usar para reemplazar ul#Monos */
+
+ul.listado-monos { padding:0; list-style:none; margin-top:15px; }
+ul.listado-monos li { background:url(/img/ico_mono.gif) no-repeat 0px 2px; margin:0 0 15px 0; padding:0 0 10px 20px; list-style:none; border-bottom: solid 1px #ddd; }
+ul.listado-monos li:last-child {border-bottom:none; margin-bottom:0;}
+ul.listado-monos li .info {width:63%; float:left; margin:0;}
+ul.listado-monos li .meta {width:35%;  float:right; margin:0; }
+
+ul.listado-monos li h3 {font-family: Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; line-height:normal;  margin:0;}
+ul.listado-monos li.pendiente p {color:#999;}
+
+ul.listado-monos li.categoria {background:url(/img/ico_category.gif) no-repeat 0px 1px; border-bottom: none; margin-bottom:10px;}
+ul.listado-monos li.categoria a {text-decoration:none;}
+
+ul.listado-monos.home-new {width:590px; }
+
+/* listado de nuevas actualizaciones */
+
+ul.listado-monos-anteriores {list-style:none; width:580px; padding-left:10px;}
+ul.listado-monos-anteriores li {list-style:none; margin-bottom:3px; width:560px; float:left; background:url(/img/ico_relacionados_ch.gif) no-repeat 0px 2px; padding-left: 20px; }
+ul.listado-monos-anteriores li.con-separador {list-style:none; margin-bottom:3px; border-top: solid 1px #ccc; margin-top:8px;
+padding-top:6px; background-position: 0px 8px;}
+ul.listado-monos-anteriores li a {display:block; width:220px; float:left;}
+ul.listado-monos-anteriores li span {display:block; width:200px; float:left; }
+
+
+/***********************************************************************************************************/
+/* DIAGRAMACION
+/***********************************************************************************************************/
+
+#Wrap { margin:0 auto;} 
+.r800 {width: 740px;}
+.r1024 {width: 960px;}
+
+#Pagina { float:left; }
+.r800 #Pagina {width: 740px;}
+.r1024 #Pagina {width: 960px;}
+
+
+/* HEADER
+/* ------------------------------------------------------------------------------------------------------- */
+
+#Header { float:left; width: 100%; background:#fff; } 
+#Logotipo { padding-right:17px; padding-left:17px; _padding-bottom:17px; float:left; width: 173px; height:93px; }
+.r800  #Logotipo {padding-top:10px;}
+.r1024 #Logotipo {padding-top:20px;}
+.monografia #Logotipo {padding-top:5px;}
+
+#Utilidades { float:left; width:440px; padding-left:3px; } 
+.r800 #Utilidades {padding-top:70px;}
+.r1024 #Utilidades {padding-top: 5px;}
+.interior .r800 #Utilidades {padding-top: 5px;}
+.monografia .r800 #Utilidades,
+.monografia .r1024 #Utilidades {padding-top:5px;}
+
+#Idioma { padding-top:5px; padding-right:10px; float:right; width: 290px; text-align:right;} 
+
+#Publi728 { text-align:center; padding-bottom:5px; }
+.r1024 #Publi728 { padding-top:5px; } 
+.r800 #Publi728 { padding-left: 5px; clear:both;}
+.monografia #Publi728 {float:none; margin:0 auto; padding:5px 0;}
+
+#Publi728 iframe { _width:680px; _float:right; }
+
+/* NAVEGACION
+/* --------------------------------------------------------------------------------------------------------*/
+
+#Navegacion { 
+/*	z-index:50; */
+	float:left;
+	width:100%; 
+	background: #9ccae9 url(/img/menu_bg.gif) repeat-x top;
+	font-size:93%;
+	line-height:normal;
+}
+
+#Navegacion ul {
+	margin:20px 0 0 10px;
+	padding:0px 0px 0px 0px;
+	list-style:none;
+}
+
+.monografia #Navegacion ul {margin-top:13px}
+
+#Navegacion li {
+    float:left;
+	width:auto;
+    background:url(/img/menu-sprites-mini.gif) no-repeat left top;
+    margin:0;
+    padding:0 0 0 7px;
+}
+#Navegacion li a {
+    float:left;
+	width:auto;
+    display:block;
+    background: url(/img/menu-sprites-mini.gif) no-repeat right top;
+    padding:11px 12px 6px 3px; /*==*/
+    text-decoration:none;
+    font-weight:bold;
+	font-size: 15px;
+    color:#333;
+}
+
+#Navegacion li:last-child a,/* la ultima oreja lleva una sombrita adicional. Los navegadores como la gente entienden esta regla */
+#Navegacion li a.ultima { 	/* a IE6 hay que ponerle esta clase por JS */
+	background: url(/img/menu-sprites-mini.gif) no-repeat right top;
+    padding:11px 17px 6px 3px; /*==*/
+}
+
+
+#Navegacion li a.nuevo { /* esta oreja lleva una banda q dice NUEVO */
+	background: url(/img/menu_r_nuevo.gif) no-repeat right top;
+    padding:11px 16px 6px 3px; /*==*/
+}
+
+
+
+/* Hack de la barra invertida comentada
+   para que IE5-Mac ignore la regla \*/
+#Navegacion li a {float:none;}
+/* Fin IE5-Mac hack */
+#Navegacion li a:hover 	{ color:#0248B0;} /* azul */
+
+/* El tab actual lo determina el template */
+#Navegacion li#actual a:hover { color:#0248B0; }
+#Navegacion li#actual {
+	background-image:url(/img/menu-sprites-mini.gif);
+	background-position:left bottom;
+	border-width:0;
+}
+
+#Navegacion li#actual a {
+	background-image:url(/img/menu-sprites-mini.gif);
+	background-position:right bottom;
+	color:#333;
+	font-weight:bold;
+	padding-bottom:6px
+}
+
+#Navegacion li#actual a#ultima { /* la ultima oreja lleva una sombrita adicional */
+	background: url(/img/menu-sprites-mini.gif) no-repeat right top;
+    padding:11px 14px 6px 1px; /*==*/
+}
+
+
+/* BUSCADOR
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+#Buscador-home { background:url(/img/bkg_busca.gif) no-repeat left bottom; float:left; width:100%;}
+
+	#Buscador-home div { padding: 20px 0px 15px 160px;}	
+	#Buscador-home label {font-size:18px; letter-spacing:-0.2px;  display:block;}
+	#Buscador-home input#query { font-size:20px; color:#C00; width:270px;
+		border:1px solid; border-color:#666 #ddd #ddd #666; float:left; margin:6px 5px 0 0;}
+	#Buscador-home input.btn {cursor: pointer; }/* manito */
+	#Buscador-home h1 {
+		margin: 20px 10px 0px 0px; 	float: right;	width: 380px;	color: #666;
+		font-family: Georgia, "Times New Roman", Times, serif;	font-size:20px;
+		line-height: normal; letter-spacing:-0.03em; font-style:italic;}
+	.r800 #Buscador-home h1 {font-size:16px; width:180px;	margin: 10px 10px -5px 0px; }
+
+#Buscador1024 {float:right; width:auto; margin:0; padding-top:8px; padding-right:10px;}
+.r800 #Buscador1024 {display:none;}
+.monografia #Buscador1024 {display:none;}
+
+#Buscador800 {float:left; width:auto; margin:0; padding-top:28px; width:525px;}
+.r1024 #Buscador800 {display:none;}
+.monografia #Buscador800 {display:block; padding-top:35px;}
+
+#Buscador1024 input#query,
+#Buscador800 input#query {background-color:#fff; padding: 2px; border:1px solid; border-color:#666 #ddd #ddd #666;}
+
+
+
+
+/* CUERPO
+/* ------------------------------------------------------------------------------------------------------- */
+
+#Cuerpo { float: left; width:100%;} 
+.home #Cuerpo { background-color: #DDEDF8; } /* celeste claro en la home */ 
+.interior #Cuerpo { background-color: #FFF; } /* blanco en las interiores */
+
+/* en la home */
+
+#Subnav { float:left; width:150px;}
+
+#Contenido { float: right; } 
+.r800 #Contenido { width:590px;}
+.r1024 #Contenido { width:800px;}
+
+#Contenido-Principal { float:left;}
+.r800 #Contenido-Principal { width:590px; }
+.r1024 #Contenido-Principal { width:500px;}
+
+#Contenido-Secundario {float:right;}
+.r800 #Contenido-Secundario { width:590px; }
+.r1024 #Contenido-Secundario { width:290px; }
+
+#Contenido-Terciario {float:left;}
+.r800 #Contenido-Terciario { width:590px; }
+.r1024 #Contenido-Terciario { width:500px;}
+
+#Publis { float:left; width:290px;}
+	#Publi-izq {width: 140px; float:left;}
+	#Publi-der {width: 150px; }
+
+#Boletines { width:290px; float:right;}
+#Destacado { float:left; width:100% }
+
+#Cursos {width:100%;  float:left;}
+
+#Categorias td {font-size: 14px; line-height:21px;}
+#Categorias td small {font-size: 11px; font-family: Tahoma, "Free Serif", Lucida Grande, Lucida Sans Unicode;}
+
+#Boletines h2, #Categorias h2, #Contenido-Terciario h2 /* titulos grandes para algunas cajitas */
+{ font-size: 24px; line-height:normal; font-weight: normal; letter-spacing:-1px; margin-bottom:6px;}
+#Destacado h3 { font-size:18px; margin-bottom:8px}
+
+/* promo Blogs */
+
+#promo-blogs-top a { text-decoration:none; float:left;}
+#promo-blogs-top a:hover { background:none; text-decoration:none; }
+#promo-blogs-top span:hover { background:none; text-decoration:none; }
+
+#titulo-promo-blogs { font:20px Georgia, "Times New Roman", Times, serif; font-style:italic; color:#feffff; letter-spacing:-1px; padding:18px 0 0 14px; margin:0; }
+
+#epigrafe-promo-blogs { font:12px Arial, Helvetica, sans-serif; color:#b6ddf2; padding-left:0; margin:0; letter-spacing:normal; }
+
+#Blog { width:290px; float:left; margin-top:-5px; margin-bottom:8px; background:transparent url(/img/promo-blogs-med.gif) repeat-y; }
+#promo-blogs-top { width:290px; height:69px; background:transparent url(/img/promo-blogs-top.gif) no-repeat top; }
+#promo-blogs-end { width:290px; height:8px; background:transparent url(/img/promo-blogs-end.gif) no-repeat bottom; }
+
+#promo-blog-editorial { padding:10px 10px 6px; }
+#ajaxreader { padding:0 10px 0; }
+
+/* en las interiores */
+
+#Titulares {
+	float:left;
+	padding:10px 10px 0;
+	width:auto;
+}
+
+.r1024 #Titulares { width:940px; }
+.r800 #Titulares {width:720px;}
+
+.interior .r1024 #Contenido {width:940px}
+.interior .r800  #Contenido {width:720px}
+
+#vista-mono #Titulares {
+	margin-bottom:10px;
+	padding:0 10px!important;
+	width:auto!important;
+	float:none!important;
+	overflow:hidden;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	line-height:16px;
+}
+
+#vista-mono #Titulares h1 {margin:0 0 15px 0;}
+
+#Titulares h1 {margin:15px 0;}
+#Titulares #Categorias {margin:0 0 15px 20px;}
+#Titulares #Categorias td {padding-right:10px;}
+
+
+#Titularesliso { overflow:auto; padding:10px 10px 0 10px; width:auto;}
+#Titularesliso h1 {margin:15px 0 15px 0;}
+#Titularesliso #Categorias {margin:0 0 15px 20px;}
+#Titularesliso #Categorias td {padding-right:10px;}
+
+#Contextual {float:right; padding:10px; background-color:#FFF}
+#Contextual ul { list-style:none; }
+#Contextual li {padding-bottom:3px; list-style:none; display:inline;}
+
+#Resbusq {padding-bottom:10px; margin-right:190px;}
+#Patrocinados ul { margin:10px 0 15px 0px; padding:0; list-style:none; }
+#Patrocinados li { background:url(/img/ico_patr.gif) no-repeat 0px 2px; margin:0 0 5px 0; padding:0 0 0 20px; }
+#Patrocinados a {text-decoration: underline;}
+
+#participar-top { width:94%; margin:0 40px 40px; }
+
+#participar { width:100%; float:left; clear:both; margin:20px 0 30px; }
+.bloque-participar { float:left; height:200px; text-align:center; width:300px; }
+
+/* cambiar ancho según la publi que se vaya a mostrar */
+#Publi-int { 
+	width:320px; margin:10px 0 0 10px; padding-left:10px; float:right; padding-top:0; background-color:#fff; z-index:5; position:relative; border-left: solid 1px #ccc; }
+
+.interior #Contenido { padding: 0px 10px 0px 10px; width:auto; float:left; background-color:#FFF}
+
+.interior #Contenidoliso { padding: 0px 10px 0px 10px; float:left; background-color:#FFF}
+
+.Paginador {background-color:#DDEDF8; margin:0px -10px 0px 0px; border:none !important;
+                         font-family:Arial, Helvetica, sans-serif;}
+
+.Paginadortrab {background-color:#DDEDF8; margin:0px -10px 0px 0px; border:none !important;
+			 font-family:Arial, Helvetica, sans-serif; clear:both; overflow:hidden;}
+.Paginador td {padding: 5px 10px 5px 10px; border:none !important;}
+
+.Paginadorblog {background-color:#DDEDF8; margin:0px -10px 0px 0px; border:none !important;
+                         font-family:Arial, Helvetica, sans-serif;}
+.Paginadorblog td {padding: 5px 10px 5px 10px; border:none !important;}
+			
+#Tags {margin:0px 0px 10px 0px; border:none !important;
+		padding: 0px 5px; font-family:Arial, Helvetica, sans-serif; width:auto;}
+#Tags td {padding: 2px; border:none !important; font-size:12px;}
+
+
+#Monos { margin:10px 0 10px 0px; padding:0; list-style:none; }
+#Monos li { background:url(/img/ico_mono.gif) no-repeat 0px 2px; margin:0 0 15px 0; padding:0 0 0 20px; }
+
+#Autor {color:#000; padding-bottom: 15px; margin-bottom:10px; margin-top:10px; border-bottom:1px  #aaa; }
+#Autor p {vertical-align:middle }
+
+#Autor1024 {}
+.r800 #Autor1024 {display:none;}
+
+#Comentarios { padding: 10px 10px 0px 10px; width:680px; float: left;}
+#Comentarios ul { margin:20px 0 10px 0px; padding:0; list-style:none; width:680px;}
+#Comentarios li { margin:0 0 15px 5px; padding:0 0 15px 0; border-bottom: solid 1px #ccc; }
+#Comentarios li:last-child { border-bottom: 0 none; }
+
+#Comentarios li .avatar {float:left;}
+
+#Comentarios li .cont-comentario {margin-left:50px;}
+#Comentarios li .cont-comentario .comandos-comentarios {float:right; margin:0;}
+#Comentarios li .cont-comentario .comandos-comentarios img {vertical-align:middle;}
+#Comentarios li .cont-comentario .username a,
+#Comentarios li .cont-comentario .username a:link,
+#Comentarios li .cont-comentario .username a:visited {color:#a00; font-weight:bold; text-decoration:none;}
+#Comentarios li .cont-comentario .username a:hover {color:#fff; background-color:#a00;}
+
+#Comentarios li .cont-comentario blockquote {margin:0;}
+
+
+.paginador-comentarios {width:666px; background-color:#efefef; padding:2px 7px}
+.paginador-comentarios .comentarios-total {float:left;}
+.paginador-comentarios .comentarios-paginas {float:right;}
+
+.comentario-publicado {padding:5px 10px; background-color:#ffc; margin-top:10px;}
+.comentario-error {padding:5px 10px; background-color:#FFCCCC; margin-top:10px;}
+.comentario-publicado p, 
+.comentario-error p {font-weight:bold;}
+
+#cont-form-comentario {background:url(/img/avatar_default.gif) no-repeat left 25px; padding:0 0 0 50px; margin-top:20px;}
+#cont-form-comentario label {font-size:14px; font-weight:bold; margin-bottom:7px; display:block;}
+#cont-form-comentario textarea {width:625px; height:80px; display:block; margin-bottom:7px;
+	font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color: #455;}
+#cont-form-comentario button { display:block; margin-bottom:15px;}
+
+#Adicional { margin: 10px 0 10px 0; overflow:hidden; width:auto; float:left; clear:both;}
+
+#vista-mono #Breadcrumb { margin:16px; float:left;}
+
+
+/* Cajitas por default sin javascript */
+
+.cajita { background: #fff url(/img/bkg_cajitas1.gif) repeat-x;
+	border:1px solid #bbb; padding: 10px; margin:0 0 8px 0;
+	-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
+.cajita.destacada {background: #0886c8 url(/img/bkg_cajitas2.gif) repeat-x; border:1px solid #0886c8;} /* azul claro */
+.cajita2 { background: #fff; padding: 10px; margin:0 0 8px 0;}
+
+/* Cajitas con javascript, basado en http://www.456bereastreet.com/ */
+
+.cb {margin:0 0 8px 0;}
+.cb {background-color:transparent; border:0} /* para que IE no herede el fondo default*/
+
+.bt { height:10px; margin:0 0 0 10px; background:url(/img/cajita.gif) no-repeat 100% 0;}
+.destacada .bt { background:url(/img/cajita_2.gif) no-repeat 100% 0;}
+.bt div { position:relative; left:-10px; width:10px; height:10px;
+	background:url(/img/cajita.gif) no-repeat 0 0; font-size:0; line-height:0;}
+.destacada .bt div { background:url(/img/cajita_2.gif) no-repeat 0 0;}
+.bb { height:10px; margin:0 0 0 10px; background:url(/img/cajita.gif) no-repeat 100% 100%;}
+.destacada .bb { background:url(/img/cajita_2.gif) no-repeat 100% 100%;}
+.bb div { position:relative; left:-10px; width:10px; height:10px;
+	background:url(/img/cajita.gif) no-repeat 0 100%; font-size:0; line-height:0;}
+.destacada .bb div { background:url(/img/cajita_2.gif) no-repeat 0 100%;}
+.i1 { padding:0 0 0 10px; background:url(/img/cajita_bordes.gif) repeat-y 0 0;}
+.destacada .i1 { background:url(/img/cajita_bordes_2.gif) repeat-y 0 0;} 
+.i2 { padding:0 10px 0 0; background:url(/img/cajita_bordes.gif) repeat-y 100% 0;}
+.destacada .i2 { background:url(/img/cajita_bordes_2.gif) repeat-y 100% 0; }
+/* Wrapper para el contenido, setear padding ac */
+.i3 { background-color: #fff; display:block; margin:0; padding:1px 0px;}
+.destacada .i3 {background-color: #0886c8;} /* azul claro */
+/* Auto clearing en el wrapper, as puede contener floats */
+/* http://positioniseverything.net/easyclearing.html */
+.i3:after { content:".";  display:block; height:0; clear:both; visibility:hidden;}
+.i3 {display:inline-block;}
+.i3 {display:block;}
+
+
+/* FOOTER
+/* ------------------------------------------------------------------------------------------------------- */
+
+#Footer { float: left; clear:both;  }
+.r800 #Footer {width: 740px;}
+.r1024 #Footer{width: 960px;}
+
+
+
+/* añadido 22/03/07
+/* si no se va a usar el dropdown grfico, es conveniente quitar estos estilos
+/*--------- dropdown ------------------- */
+
+select {
+  display: block;
+}
+
+#drop1024, #drop800 { width: 134px;}
+
+select.replaced {
+  display: none;
+}
+
+ul.selectReplacement {
+  background: url(/img/bkg_select.gif) right top no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 22px; /*1.65 em*/
+  position:absolute;
+}
+#drop1024 {top:144px;}
+#drop800 {top:67px;}
+
+ul.selectReplacement li {
+  display: block;
+  background:#DDEDF8!important;
+  color: #333;
+  cursor: pointer;
+  display: none;
+  font-size: 11px;
+  line-height: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0px 1px 0px 30px!important;
+  width: 90px!important;
+
+  float:none;
+}
+ul.selectOpen li {
+  display: block;
+}
+ul.selectReplacement li.selected {
+  color: #000;
+  display: block;
+}
+ul.selectOpen li.selected {
+/*  background:#none!important;*/
+  display: block;
+  width:90px;
+}
+ul.selectOpen li:hover,
+ul.selectOpen li.hover,
+ul.selectOpen li.selected:hover {
+/*  background: #AAA!important; */
+  color: #0248B0;
+}
+li#i-org {background: url(/img/bkg_select_ind.gif) top left no-repeat!important;}
+li#i-ain {background: url(/img/bkg_select_txt.gif) top left no-repeat!important;}
+li#i-aex {background: url(/img/bkg_select_ask.gif) top left no-repeat!important;}
+
+/* Añadido 21 de agosto de 2007 */
+
+.recuadro {  border: solid 2px #0248B0; padding:4px 5px; }
+.recuadro a {text-decoration: none;}
+
+#Highlight {float:left; background-color:#ffc; margin-top:-10px;  border: solid 1px #aaa; width:auto; display: none;}
+#Highlight p { font-family:Arial, Helvetica, sans-serif; margin:2px 5px; font-size:10px; vertical-align:middle }
+
+.hilite1 { background-color:#d2ffc7; }
+.hilite2 { background-color:#c7caff; }
+.hilite3 { background-color:#f4c7ff; }
+.hilite4 { background-color:#c7f8ff; }
+.hilite5 { background-color:#ffc7c9; }
+.hilite6 { background-color:#ffeec7; }
+.hilite7 { background-color:#d2ffc7; }
+.hilite8 { background-color:#ffc7d9; }
+.hilite9 { background-color:#ffdec7; }
+
+#Relacionados { padding: 10px 10px 10px 10px; margin:0 10px; font-size: 11px;}
+.r800 #Relacionados {width:300px;}
+.r1024 #Relacionados {width:400px;}
+
+#Relacionados h2 { font-size: 24px; line-height: normal; font-weight: normal; letter-spacing: -1px; margin-bottom: 6px;}
+
+#Relacionados h3 {font-size:12px; line-height: normal; letter-spacing:normal; font-weight:bold; color: #455;}
+
+
+
+
+/* Levantado de mono_v2-cambios.css, pegado aqui para dejar sin efecto ese archivo obsoleto */
+
+#navlinks li {
+	display: inline;
+	margin-right: 0.1em; padding-right: 0.2em;
+	border-right: 1px solid #99C;
+}
+
+.cajita p {background-color:transparent;}
+
+
+/* REGISTRO POPUP
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+body.registro { margin:5px; padding:0; background:#DDEDF8 url(/img/bkg_registro.gif) repeat-x scroll left -60px }
+
+.registro div.main {width:600px; margin:0 auto;} 
+
+.registro h1 {
+	font-size:22px; font-family: Georgia, "Times New Roman", Times, serif; color:#a00; font-style:italic;
+	letter-spacing:-0.5px; margin-bottom:10px;}
+	
+.registro h2 { font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:17px; color:#333; font-style:normal; margin:0; margin-bottom:10px;
+	letter-spacing:normal; font-weight:normal;}
+
+.registro select {display:inline}
+
+.registro .cajita {padding-top:20px; padding-bottom:4px;}
+
+.registro table {}
+.registro table td {vertical-align:top;}
+
+.registro .w-fijo1 {width:172px;}
+.registro .w-fijo2 {width:172px;}
+
+.registro input,
+.registro select { font-size:12px; font-family:Tahoma, "Free Serif", Lucida Grande, Lucida Sans Unicode;}
+
+.registro label {font-size:11px; font-family:Tahoma, "Free Serif", Lucida Grande, Lucida Sans Unicode;}
+.registro label.check {cursor:pointer; text-align:left;}
+
+.registro div.c1 {width:578px; float:left; min-height:190px; height:auto!important; height:190px;}
+
+.registro div.c4 {padding:0 10px;}
+
+.registro div.c1 table {width:270px; }
+
+.p-registro-izq { float:left; }
+.p-registro-der { border-left:1px solid #D6D6D6; float:right; padding-left:20px; }
+
+.registro div.c1 table td {padding-right:4px; padding-bottom:4px;}
+.registro div.c4 table td {padding-right:4px; padding-bottom:5px;}
+
+.registro .opcional-usa { display:none; padding-bottom:10px; padding-top:10px; }
+
+.registro .button {font-size:14px; font-weight:bold; padding:3px 5px}
+.registro span.error {font-size:11px;  font-family:Tahoma, "Free Serif", Lucida Grande, Lucida Sans Unicode;}
+
+
+/* REGISTRO
+/* ------------------------------------------------------------------------------------------------------- */
+
+.registro-normal h2 { font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:17px; color:#333; font-style:normal; margin:0; margin-bottom:10px;
+	letter-spacing:normal; font-weight:normal;}
+
+.registro-normal div.c1 {width:435px; float:left; margin:20px 0 20px 60px; }
+
+.registro-normal select {display:inline}
+
+.registro-normal table td {vertical-align:top;}
+
+.registro-normal .w-fijo1 {width:260px;}
+.registro-normal .w-fijo2 {width:260px;}
+
+.registro-normal div.c1 table td,
+.registro-normal div.c4 table td {padding-right:10px; padding-bottom:6px;}
+
+.registro-normal input.button {font-size:14px; font-weight:bold; padding:3px 5px; margin:0;}
+
+
+/* EDITAR PERFIL
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+.editar-perfil select {display:inline}
+
+.editar-perfil table td {vertical-align:top;}
+
+.editar-perfil .w-fijo1 {width:740px;}
+.editar-perfil .w-fijo2 {width:310px;}
+
+.editar-perfil table td {padding-right:10px; padding-bottom:5px;}
+
+.editar-perfil input,
+.editar-perfil textarea,
+.editar-perfil select {margin-bottom:2px;}
+
+.editar-perfil select {font-family: sans-serif;}
+
+.editar-perfil input.button {font-size:14px; font-weight:bold; padding:3px 5px; margin:0;}
+.editar-perfil textarea {font-size:12px;}
+
+
+/* PERFIL PRIVADO
+/* ------------------------------------------------------------------------------------------------------- */
+
+body.perfiles .navegacion {width:170px; display:inline; float:left; margin-left:10px; }
+body.perfiles .contenido {background:#fff; width:760px; display:inline; float:left; padding-left:10px;
+padding-right:10px; padding-bottom:10px; min-height:500px; height:auto!important; height: 500px; }
+body.perfiles #Footer .cajita2 {background:transparent;}
+
+body.perfiles .contenido .bloque_avatar {float:left; width:auto; margin-right:10px; height:115px; text-align:center;}
+body.perfiles .contenido .bloque_avatar.pequeno {height:auto;}
+body.perfiles .contenido .bloque_avatar img {margin-top:10px; }
+body.perfiles .contenido .bloque_utilidades {float:right; width:160px; margin-top:15px; margin-bottom:0;}
+body.perfiles .contenido .indentado {margin-left:110px;}
+
+body.perfiles .contenido h1 {margin-top:0.6em; font-size:30px;}
+body.perfiles .contenido h1.pequeno {margin-bottom:0; font-size:24px;}
+body.perfiles .contenido h2 {font-family:Georgia,"Times New Roman",Times,serif; font-size:18px; font-style:italic;
+letter-spacing:normal;border-bottom:1px solid #CCCCCC; color:#445555; margin-bottom:0.5em; margin-top:1em; padding-bottom:6px;}
+body.perfiles .contenido h3 {font-family:Georgia,"Times New Roman",Times,serif; font-size:16px; letter-spacing:normal;
+color:#999; margin-bottom:0.5em; margin-top:0.5em; font-weight:normal;}
+
+
+body.perfiles .contenido ul.listado-monos li h3 {font-family: Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; line-height:normal; margin:0;}
+
+
+h2.seccion {font-family:Georgia,"Times New Roman",Times,serif; font-size:18px; font-style:italic; letter-spacing:normal;
+border-bottom:1px solid #CCCCCC; color:#445555; margin-bottom:0.5em; margin-top:1em; padding-bottom:6px;}
+
+
+/* UPLOADER
+/* ------------------------------------------------------------------------------------------------------- */
+
+/*#subirmono .zend_form { width:400px; margin:0 auto; }*/
+
+#subirmono .zend_form { font-weight:bold; margin:30px 20px; width:600px; }
+#subirmono .zend_form dd { display:block; line-height:20px; margin-top:4px; }
+#subirmono .zend_form #titulo { width:320px; }
+#subirmono .zend_form #descripcion { width:400px; height:160px; }
+#subirmono .zend_form dd #submit { margin-left:100px; }
+#subirmono .zend_form dt { display:inline; float:left; margin-top:4px; }
+#subirmono .zend_form label { float:left; margin-left:10px; margin-right:10px; text-align:right; width:120px; }
+
+#uploader-envio-true { margin:20px; }
+
+#uploader-envio-true p { margin-top:10px; }
+
+
+/*-------- ERRORES ZENDFORMS --------*/
+
+ul.errors {
+	list-style-image:none;
+	list-style-position:inside;
+	list-style-type:none;
+	color:red;
+	margin:4px;
+	padding:8px;
+	clear:both;
+	border:1px solid #DCBC91;
+	background-color:#FFFFCC;
+}
+
+ul.errors li {
+	padding-left:20px;
+	background:transparent url(/img/ico-alert.png) no-repeat top left;
+}
+
+/* AYUDA (FAQ)
+/* ------------------------------------------------------------------------------------------------------- */
+
+.ayuda { font-family: Georgia, "Times New Roman", Times, serif; font-size:14px; line-height:18px; background-color: #FFF; }
+.ayuda h2 {font-family:Georgia,"Times New Roman",Times,serif; font-size:18px; line-height: normal; letter-spacing:normal; color:#445555; }
+.ayuda h3 {font-family:Georgia,"Times New Roman",Times,serif; font-size:14px; line-height: normal; letter-spacing:normal; color:#445555; }
+.ayuda small {font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height: normal; letter-spacing:normal; }
+.ayuda p {margin: 9px 0 9px 0; background-color: #FFF;}
+.ayuda ul {margin-left:20px}
+.ayuda ol {margin-left:35px; background-color: #FFF;}
+.ayuda table, .Monografia td { border:1px solid #aaa;}
+.ayuda th {border:1px solid #aaa; background-color:#F4F4F4;}
+.ayuda td, .Monografia th {padding:2px;}
+.status { float:left; padding-right:4px; }
+
+
+/* GUIAS (WINZIP)
+/* ------------------------------------------------------------------------------------------------------- */
+
+.tabla-zip li { list-style:none; list-style-image:none; list-style-position:inside; list-style-type:none; }
+
+/* PERFIL (404)
+/* ------------------------------------------------------------------------------------------------------- */
+
+.contenido-404 {
+	padding-left:20px;
+}
+
+#titulo-error {
+	color:#AA0000;
+	font-family:Georgia,"Times New Roman",Times,serif;
+	font-weight:normal;
+	font-size:26px;
+	margin-bottom:0.5em;
+	padding-bottom:6px;
+}
+
+#subtitulo-error {
+	color:#445555;
+	font-family:Georgia,"Times New Roman",Times,serif;
+	font-size:18px;
+	font-style:italic;
+	letter-spacing:normal;
+}
+
+.contenido-404 p {
+	margin-top:10px;
+	line-height:17px;
+}
+
+#tiene-monos, #tiene-mensajes, #tiene-mensajes-simple { font-weight:bold; text-decoration:none; }
+
+
+
+/* TRABAJOS PPT/PDF
+/* ------------------------------------------------------------------------------------------------------- */
+
+.notificacion-formato {
+	background:#FFFFCC url(/img/ico_advertencia.gif) no-repeat scroll 16px;
+	border-color:#AAAAAA #FFFFCC;
+	border-style:solid;
+	border-width:1px;
+	padding:1px 10px 1px 50px;
+	width:500px;
+}
+
+.notificacion-formato p {background-color:#FFFFCC !important;line-height:22px;}
+
+#navlinks2 {float:right;}
+
+#navlinks2 li {
+	display: inline;
+	margin-right: 0.1em; padding-right: 0.2em;
+	border:0 none!important;
+}
+
+.bred-pdf-ppt { float:left; }
+.bred-videos { float:left; padding-top:10px; }
+
+/***Para cuando se incluye el cartel de "BETA"***/
+
+#beta { font-family:Arial, Helvetica, sans-serif; font-size:8px; font-weight:normal; display:inline; padding-left:4px; }
+
+/*-----------------------------------------------------------------------------------------*/
+
+
+/*-- MENSAJES PRIVADOS --*/
+
+#nav-mps { margin:30px 0 10px; padding:0 3px; text-align:right; }
+#nav-mps li {
+	background-color:#EFEFEF;
+	display:inline;
+	margin:1px;
+	padding:4px 6px;
+	border:1px solid #CFCFCF;
+	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
+}
+
+#nav-mps li a, .redactar-mps a {
+	color:#4F4F4F;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+#nav-mps li a:hover, .redactar-mps a:hover { text-decoration:none; color:#4F4F4F; background:none; }
+
+#nav-mps li:hover, #nav-mps .activa-mps { background-color:#DDEDF8; border-color:#3B90BF; color:#4F4F4F; }
+
+.redactar-mps a, .redactar-mps a:hover { color:#0E328D; }
+
+.redactar-mps {
+	background-color:#EFEFEF;
+	float:left;
+	font-size:14px;
+	font-weight:bold;
+	margin:26px 0 0;
+	padding:3px 6px;
+	width:126px;
+	-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;
+}
+
+.redactar-mps:hover, .activo-mps { background-color:#FFD68F; }
+
+#caja-mps { width:716px; padding:20px; background-color:#EFEFEF; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px; }
+
+#caja-mps label { float:left; text-align:right; width:60px; }
+#caja-mps input, #caja-mps textarea { width:400px; margin-left:12px; }
+
+#caja-mps #captcha, #caja-mps #submit { margin:0 0 10px 72px; width:auto; }
+
+.table-mps { width:100%; text-align:left; font-size:12px; }
+
+.table-mps a { text-decoration:none; }
+
+.table-head-mps { font-family:Arial, Helvetica, sans-serif; margin-bottom:10px; color:#6F6F6F; }
+
+.table-mps tr td, .table-mps tr th { border-bottom:1px solid #C1BFB3; padding:6px 4px; }
+
+.cuerpo-mps-blank { background-color:#FFF; margin:16px 0; padding:10px 6px; }
+
+.autocomplete-loading { background-color:#EFEFEF; }
+
+.leyenda-mps { display:block; margin:3px 74px; }
+
+.ico-mps-nuevos { background:transparent url(/img/mps-nuevos.gif) no-repeat bottom right; padding:4px 20px 1px 0; }
+
+.ico-mps { background:transparent url(/img/mps.gif) no-repeat bottom right; padding:4px 20px 1px 0; }
+
+.p-infomps { margin:8px 0 4px; }
+
+#tiene-mensajes, #tiene-mensajes-simple { padding:2px 4px; }
+
+#tiene-mensajes:hover { color:#AA0000; }
+
+#tiene-mensajes-simple:hover { text-decoration:none; }
+
+.paginador-mps { background-color:#DFDFDF; float:left; margin-bottom:10px; padding:10px; width:100%; }
+
+.paginador-mps a { text-decoration:none; }
+
+.paginador-mps a:hover { text-decoration:none; }
+
+.paginador-mps span { margin:0 2px; }
+
+/*.paginador-mps span { margin:0 2px; }*/
+
+.not-mp-enviado {
+	background:#CFF7FF url(/img/ico_exito.gif) no-repeat scroll 16px 50%;
+	margin-bottom:10px;
+	border-color:#AAAAAA #CFF7FF;
+	border-style:solid;
+	border-width:1px;
+	padding:10px 0 10px 40px;
+	width:500px;
+}
+
+
+/* JQUERY - AUTOCOMPLETE.JS -> MPS
+/* ------------------------------------------------------------------------------------------------------- */
+
+.autocomplete-w1 { background:url(img/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:8px 0 0 6px; /* IE6 fix: */ _background:none; _margin:0; }
+.autocomplete { list-style:none; list-style-type:none; list-style-position:outside; border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; }
+.autocomplete .selected { background:#DDEDF8; }
+.autocomplete div { padding:2px 5px; white-space:nowrap; }
+.autocomplete strong { font-weight:normal; color:#3399FF; }
+
+
+/*-- ESTADO MONOGRAFIAS EN PERFIL --*/
+
+.p-cert-pdf a { font-family:Tahoma,"Free Serif",Lucida Grande,Lucida Sans Unicode; font-size:11px; line-height:14px; }
+
+.p-cert-pdf a:hover { text-decoration:underline; color:#0248B0; background:transparent none; }
+
+
+/*-- TEMPLATES PDF - ESTILOS DE LISO (22/12/2009) --*/
+
+.datosautor {
+border-color:#AAAAAA;
+border-style:solid;
+border-width:1px;
+padding:1px 25px 1px 25px;
+width:880px;
+margin-left: auto ;
+margin-right: auto ;
+font-size:11px;
+}
+
+.ebookdownload {
+background:#FFFFCC url(ico_advertencia.gif) no-repeat scroll 16px 50%;
+border-color:#AAAAAA #FFFFCC;
+border-style:solid;
+border-width:1px;
+padding:1px 10px 1px 20px;
+width:500px;
+margin-left: auto ;
+margin-right: auto ;
+
+margin-right: auto ;
+font-size:14px;
+}
+
+.ebookdownload p {
+background-color:#FFFFCC;
+margin:9px 0;
+}

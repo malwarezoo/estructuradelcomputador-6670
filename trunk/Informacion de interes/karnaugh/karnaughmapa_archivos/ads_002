@@ -1,0 +1,39 @@
+{ 
+ 
+var google_ads = new Array(); 
+var google_ad; 
+var google_radlinks = new Array(); 
+var google_radlink; 
+var google_info = new Object(); 
+google_ad = new Object(); 
+google_ad.n = 1; 
+google_ad.type = "text"; 
+google_ad.bidtype = "CPC"; 
+google_ad.targeting_type = "contextual"; 
+google_ad.url = "http://googleads.g.doubleclick.net/aclk?sa=l&amp;ai=BK-VoXEGFTPvUFMiS6QaEz4zQA5WtitMBvdqu6xjAjbcB8JMJEAEYAyC_loYGKAI4AFCswquzBWCh0ISALKABy9eE4AOyARN3d3cubW9ub2dyYWZpYXMuY29tyAEB2gFFaHR0cDovL3d3dy5tb25vZ3JhZmlhcy5jb20vdHJhYmFqb3MxNC9rYXJuYXVnaG1hcGEva2FybmF1Z2htYXBhLnNodG1sqQIpCwITD5u1PsgClePYE6gDAegDtAPoAx7oAwX1AwAAAAQ&amp;num=3&amp;sig=AGiWqtxezKhbWIxBTaDerOehMj4M6NykOQ&amp;client=ca-pub-8402207393259754&amp;adurl=http://registro.ar.groupalia.com/suscripcion/%3Fmktc%3Dredgooevbue"; 
+google_ad.visible_url = "Groupalia.com/Actividades_Madrid"; 
+google_ad.line1 = "Descuentos Buenos Aires"; 
+google_ad.line2 = "Hasta el 90% de descuento"; 
+google_ad.line3 = "registr\x26#225;ndote en Groupalia"; 
+google_ad.regionname = ""; 
+google_ads[0] = google_ad; 
+google_ad = new Object(); 
+google_ad.n = 2; 
+google_ad.type = "text"; 
+google_ad.bidtype = "CPC"; 
+google_ad.targeting_type = "contextual"; 
+google_ad.url = "http://googleads.g.doubleclick.net/aclk?sa=l&amp;ai=BY0EKXEGFTPvUFMiS6QaEz4zQA4m3ztEBsd_SihbAjbcBkL8FEAIYBCC_loYGKAI4AFD97rymBGCh0ISALKAB0aGp8AOyARN3d3cubW9ub2dyYWZpYXMuY29tyAEB2gFFaHR0cDovL3d3dy5tb25vZ3JhZmlhcy5jb20vdHJhYmFqb3MxNC9rYXJuYXVnaG1hcGEva2FybmF1Z2htYXBhLnNodG1sgAIBqQIT5dUuSASRPsgCofX-EqgDAegDtAPoAx7oAwX1AwAAAAQ&amp;num=4&amp;sig=AGiWqtyD6rL2T_Virc_JbAv6wMqoANxEqA&amp;client=ca-pub-8402207393259754&amp;adurl=http://www.paginasamarillas.com.ar/gps"; 
+google_ad.visible_url = "www.paginasamarillas.com.ar"; 
+google_ad.line1 = "Mapas GPS"; 
+google_ad.line2 = "Es f\x26#225;cil, ingresa aqu\x26#237; y"; 
+google_ad.line3 = "descargalos gratis a tu celular!"; 
+google_ad.regionname = ""; 
+google_ads[1] = google_ad; 
+google_info.feedback_url = "http://www.google.com/url?ct\x3dabg\x26q\x3dhttps://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.monografias.com/trabajos14/karnaughmapa/karnaughmapa.shtml%26hl%3Des%26client%3Dca-pub-8402207393259754%26adU%3DGroupalia.com/Actividades_Madrid%26adT%3DDescuentos%2BBuenos%2BAires%26adU%3Dwww.paginasamarillas.com.ar%26adT%3DMapas%2BGPS%26gl%3DAR\x26usg\x3dAFQjCNE8pDRcXW0WWapkNSogbBMpVYF2Cw"; 
+if (window.google_ad_request_done) { 
+google_ad_request_done(google_ads); 
+} 
+if (window.google_radlink_request_done) { 
+google_radlink_request_done(google_radlinks); 
+} 
+}

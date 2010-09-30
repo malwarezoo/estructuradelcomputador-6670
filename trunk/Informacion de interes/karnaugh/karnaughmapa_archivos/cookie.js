@@ -1,0 +1,1 @@
+_GA_googleCookieHelper.setCookieInfo({"_cookies_":[{"_value_":"ID=2ba14e58e2f5a340:T=1283801291:S=ALNI_Ma_yGRGoNWsCDI4WkjBIA5SyCGpPg","_expires_":1346873291,"_path_":"/","_domain_":"monografias.com"}]});
