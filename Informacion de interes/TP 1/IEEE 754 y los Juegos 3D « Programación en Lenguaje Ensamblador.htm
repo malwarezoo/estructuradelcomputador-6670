@@ -1,0 +1,554 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="es"><head>  
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>IEEE 754 y los Juegos 3D « Programación en Lenguaje Ensamblador</title>
+<link rel="stylesheet" href="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/style.css" type="text/css" media="screen">
+<link rel="alternate" type="application/rss+xml" title="Programación en Lenguaje Ensamblador RSS Feed" href="http://asm86.wordpress.com/feed/">
+<link rel="pingback" href="http://asm86.wordpress.com/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="Programación en Lenguaje Ensamblador » IEEE 754 y los Juegos&nbsp;3D RSS de los comentarios" href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" href="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/global.css" type="text/css">
+<script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/comment-reply.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://asm86.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://asm86.wordpress.com/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="Programación en Lenguaje Ensamblador" href="http://asm86.wordpress.com/">
+<link rel="prev" title="IF, FOR y Registro&nbsp;EFLAGS" href="http://asm86.wordpress.com/2009/04/29/if-for-y-registro-eflags/">
+<link rel="next" title="Unos Cuantos Cientos de&nbsp;Lineas" href="http://asm86.wordpress.com/2009/05/04/unos-cuantos-cientos-de-lineas/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/">
+<link rel="shortlink" href="http://wp.me/pmV9Q-5j">
+<link rel="shortcut icon" type="image/x-icon" href="http://1.gravatar.com/blavatar/1abb96310ce009a957944b632659d618?s=16&amp;d=http://s2.wp.com/i/favicon.ico">
+<link rel="icon" type="image/x-icon" href="http://1.gravatar.com/blavatar/1abb96310ce009a957944b632659d618?s=16&amp;d=http://s2.wp.com/i/favicon.ico">
+<link rel="apple-touch-icon" href="http://1.gravatar.com/blavatar/3b5f3f812da299dd234b2113899e6f0b?s=158&amp;d=http://s0.wp.com/wp-content/themes/h4/i/webclip.png">
+	<style type="text/css">
+	<![CDATA[ 
+				div#likes { margin-top: 15px; }
+		.like-button { border: 1px solid #eee; padding: 2px 6px; font-size: 13px; font-family: arial, tahoma, sans-serif; }
+		#wpl-likebox { clear: left; font-size: 11px; font-family: arial, tahoma, verdana, sans-serif !important; min-height: 30px; margin: 10px 0 !important; padding: 5px 0 10px 0 !important; }
+		#wpl-button { float: left; background: url( /i/buttonbg.png ) top left repeat-x; margin-right: 7px; border: 1px solid #d4d4d4; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+		#wpl-button a { color: #666 !important; line-height: 130% !important; text-decoration: none !important; outline: none; float: left; padding: 3px 6px 2px 24px !important; font-size: 11px !important; background: url( /i/likestar.png ) 6px 49.8% no-repeat; }
+		#wpl-button.liked { background: #feffce; border: 1px solid #f3e389; }
+		#wpl-button.liked a { color: #ba871b !important; }
+		#wpl-likebox #wpl-count { min-height: 25px; line-height: 130% !important; float: left; padding-top: 4px; }
+		#wpl-likebox #wpl-avatars { clear: left; max-height: 98px; overflow: hidden; margin-top: 15px; line-height: 130% !important; }
+		#wpl-likebox #wpl-avatars img { border: none !important; }
+	]]>
+	</style>
+	<link rel="openid.server" href="http://asm86.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://asm86.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wordpress.com/opensearch.xml" title="WordPress.com">
+<link rel="search" type="application/opensearchdescription+xml" href="http://asm86.wordpress.com/osd.xml" title="Programación en Lenguaje Ensamblador">
+<style type="text/css">.recentcomments a{display:inline !important;padding: 0 !important;margin: 0 !important;}</style>
+
+<style type="text/css">
+table.recentcommentsavatar img.avatar {border: 0px; margin:0;}
+table.recentcommentsavatar a {border: 0px !important;background-color: transparent !important}
+td.recentcommentsavatartop {padding:0px 0px 1px 0px;margin:0px; }
+td.recentcommentsavatarend {padding:0px 0px 1px 0px;margin:0px; }
+td.recentcommentstexttop { border: none !important;padding:0px 0px 0px 10px;}
+td.recentcommentstextend { border: none !important;padding:0px 0px 2px 10px;}
+</style><script type="text/javascript"> 
+	window.google_analytics_uacct = "UA-52447-2"; 
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/ga.js" async="" type="text/javascript"></script>
+</head><body>
+  <div id="container">
+
+<div id="sitetitle">
+<h1><a href="http://asm86.wordpress.com/">Programación en Lenguaje Ensamblador</a></h1>
+<h2>-El Verdadero Lenguaje de las Máquinas-</h2>
+</div>
+
+<div id="menu">
+<ul>
+  <li><a href="http://asm86.wordpress.com/">Inicio</a></li>
+  <li class="page_item page-item-597"><a href="http://asm86.wordpress.com/contacto/" title="C O N T A C T&nbsp;O">C O N T A C T&nbsp;O</a></li>
+<li class="page_item page-item-2"><a href="http://asm86.wordpress.com/about/" title="Lenguaje&nbsp;Ensamblador:">Lenguaje&nbsp;Ensamblador:</a></li>
+</ul>
+</div>
+  
+    <div id="content">
+    
+      <div id="left">
+            
+                
+                        
+              <div id="post-329" class="post-329 post type-post hentry category-uncategorized tag-binario tag-ensamblador tag-intel tag-programacion tag-videojuegos entry">
+            
+                <h2><a href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/">IEEE 754 y los Juegos&nbsp;3D</a></h2>
+                
+                <script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/adsense.js"></script><h2 style="margin-bottom: 0pt;">–Importancia del Punto Flotante en los Videojuegos–</h2>
+<p style="margin-bottom: 0pt;">###ESTA NOTA AUN NO ESTA TERMINADA NI SERA LA ULTIMA ACERCA DEL PUNTO FLOTANTE O IEEE 754###</p>
+<p style="margin-bottom: 0pt;">Hasta donde recuerdo, el primer juego que
+ exigía una unidad de punto flotante para funcionar fue Quake de Id 
+Software. O al menos ese fue el primer juego que necesitaba un 
+procesador Pentium de Intel como requerimiento mínimo.</p>
+<p><img src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/qk.jpg" alt="imagen de quake" align="left" hspace="10"></p>
+<p style="margin-bottom: 0pt;">¿Pero que tiene que ver uno de los mas 
+famosos juegos para computadora con un aburrido circuito electrónico que
+ solo sabe hacer cuentas? Resulta que para hacer los cálculos para las 
+gráficas 3D es necesario una gran velocidad y precisión numérica. Y 
+aunque es posible hacer gráficas respetables usando “fixed point” (a los
+ estándares de los noventas), desde el punto de vista de un procesador 
+Intel es mas rápido y eficiente trabajar con números de punto flotante. 
+Aunque antes de empezar a detallar el funcionamiento de una FPU, es 
+necesario aclarar algunos términos básicos: Para empezar. ¿Porqué 
+demonios se le llama unidad de punto flotante?</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Flotante significa que sube y baja y 
+que no se mantiene al mismo nivel, tal y como lo hace un barco de papel 
+que flota en el agua. Contrario a lo que sucede con el punto fijo o 
+Fixed Point. Donde el punto que separa a los enteros de las fracciones 
+se mantiene mas o menos en el mismo lugar o casi no se mueve. El simil 
+en el mundano sistema decimal son los números de notación científica. 
+Esos que tienen un número con un punto una cifra chiquitita que les 
+cuelga por un lado. Para quienes fueron a la escuela pública aquí va un 
+ejemplo sencillo:</p>
+<p style="margin-bottom: 0pt;">2.345 x 10^6</p>
+<p style="margin-bottom: 0pt;">Lo que nos dice esta expresión es que al 
+número 2.345 hay que multiplicarlo por 10^6. Como 10^6 es un millón 
+(1,000,000) la multiplicación es 2.345 x 1,000,000 que nos da un 
+fabulosos total de 2,345,000. Para quien tiene mas de 2 dedos de frente 
+es obvio que no era necesario hacer todo este cálculo, solo bastaba con 
+‘correr’ (como dirían en españa) el punto 6 lugares hacia la derecha. Si
+ el exponente de la base 10 es negativo, entonces habría que deslizarsa 
+hacia la izquierda. Y si el exponente fuera cero el punto se quedaría 
+donde está.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Sin embargo, dentro del mundo de la 
+computación no existe el sistema decimal, todo se hace en binario. Si 
+recuerdan la nota de “El Partido por la Mitad” sabrán como se 
+representan las fracciones en este sistema. Sin embargo, la mayor parte 
+de lo que se aplica para la notación científica decimal tambien cuenta 
+para la notación exponencial binaria. En este gráfico vemos como se 
+almacena un flotante de 32 bits:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">***aqui deberia de ir un dibujo de un flotante de 32 bits***</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Veamos cada parte del número:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Signo</strong>.- Es el bit 
+mas alto, pero se interpreta diferente que los enteros con signo. Aquí 
+simplemente indica que el valor es positivo (bit = 0) o negativo (bit = 
+1)</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Exponente</strong>.- Es un 
+número entero signado. En este caso mide 8 bits y puede representar de 
+-128 a + 127. No hay que olvidar que en los números de punto flotante la
+ base es 2. Un exponente debe de ser polarizado (biased) para evitar 
+errores en el cálculo de recíprocos.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Mantisa o Significando</strong>.-
+ Son los últimos 23 bits. (aunque funciona como si fueran 24) El tamaño 
+del significando determina la precisión de los números de punto 
+flotante. Pues aunque es posible representar valores con exponente tan 
+grande como 2^ 255. Mas allá de 16,777,216 o de 1 / 16,777,216 comienza a
+ perderse precisión.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Ahora veamos un ejemplo clásico del libro de Brey. El número decimal 100.25 a formato de punto flotante:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Tenemos 100.25</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Convirtamos la parte entera a binario del método tradicional:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">comienza con 100</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">0110 0100</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">convertir a binario la parte 
+fraccionaria es diferente. A la fracción le vamos restando potencias 
+negativas de 2. Si se puede restar se resta y se escribe un uno y si no 
+se escribe un cero. Seguimos el proceso hasta que la fracción se iguala a
+ cero o hasta que se nos acaben los bits para representarla.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">0.25 – 0.5 &lt;0 ——- 0</p>
+<p style="margin-bottom: 0pt;">0.25– 0.25 &gt;= 0 —-1</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">0.01</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Entonces, l00.25 es 01100100.01</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Como sabemos, multiplicar un número 
+por un valor elevado a la potencia cero no lo altera sin importar porqué
+ valor se multiplique, entonces</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">01100100.01 == 01100100.01 x 2 ^ 0</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">El último paso es deslizar el punto 
+hasta la derecha del primer número UNO. Esto equivale a multiplicar el 
+número por una potencia de 2 (Recuerden que una división es en realidad 
+una multiplicación por un valor con exponente negativo) y hay que 
+ajustar el exponente del 2 de acuerdo con ese movimiento:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">01.10010001 x 2 ^ 6</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Esta notación significa: Multiplicar 
+el valor 01.10010001 por 2^6. Lo que nos da 01100100.01 que es el valor 
+en formato binario de punto fijo.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Bueno, hasta ahora apenas hemos visto
+ como convertir valores con decimal a notacion científica binaria. Pero 
+no hemos visto nada sobre valores de punto flotante. Para hacer esto, 
+aún hay que hacer algunas modificaciones:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>El signo pasa directamente</strong>.- Solo va 0 si es positivo y 1 si es negativo.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>El exponente debe ser polarizado (biased)</strong>.-
+ Para evitar desbordamientos a la hora de obtener el recíproco de un 
+número es necesario polarizarlo. Esto se hace sumándole el mayor entero 
+positivo. En este caso 7F hexadecimal para 8 bits. Esto permite 
+cambiarlo de signo impunemente sin necesidad de preocuparse por un 
+desbordamiento causado por el Wrap-Around. Si miran el Yin-Yang binario 
+(la rueda azul y roja de la nota Positivo y Negativo) verán que este 
+proceso manda el cero a la parte baja del círculo que representa los 
+valores con signo.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Al significando se le quita el bit J</strong>.-
+ Como ya saben desde sus años en la primaria pública. A la izquierda del
+ punto que separa los enteros de las fracciones, siempre debe de haber 
+un número diferente de cero. En el caso decimal puede ser cualquier 
+valor del 1 al 9. Pero en binario, este valor solo puede ser UNO. Y si 
+el valor no es uno, entonces el exponente no está bien definido. Ese bit
+ es llamado “Bit J” en los manuales de Intel. De este modo, solo los 23 
+bits que siguen al punto se escriben en el formato. Los bits a la 
+derecha se rellenan con ceros.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">***tengo pendiente poner aqui la construcción del valor flotante***</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;">Pero las cosas no son tan sencillas. 
+En el mundo del punto flotante existen una gran cantidad de bestias 
+extráñas que solo quien programa en Ensamblador puede verlas cara a 
+cara. Algunas de estas son:</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>NaN’s</strong>.- Es cuando 
+una operación da un resultado que no puede ser representado por los 
+números reales. Como la raiz cuadrada de un valor negativo.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Infinito</strong>.- Es posible representar el infinito en formato de punto flotante.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Números denormales</strong>.-
+ Hay una zona de la recta numérica real que no puede ser representada 
+adecuadamente en formato de punto flotante. Para evitar esto la FPU 
+manda una señal cuando detecta esta condición.</p>
+<p style="margin-bottom: 0pt;">
+</p><p style="margin-bottom: 0pt;"><strong>Zona de baja precisión</strong>.-
+ El rango de números reales que pueden ser representados en punto 
+flotante es similar a un resorte. Si el resorte está comprimido no hay 
+espacio entre los anillos que forma la espiral pero conforme lo 
+estiramos se van creando huecos. Del mismo modo, hay zonas en las que 
+esos huecos son tan grandes que hay una gran pérdida de datos debida al 
+redondeo.</p>
+<p style="margin-bottom: 0pt;">Bueno, esta nota ya se extendió demasiado. Otro día seguiré con un estudio de esta clase de fenómenos.</p>
+<ol>
+<li>
+<ol>
+<p style="margin-bottom: 0pt;">
+</p></ol>
+</li>
+</ol>
+
+<!--adcode-->
+<div style="padding-top: 5px; text-align: left;" class="adcode" align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-3443918307802676";
+google_ad_output = "js";
+google_feedback = "on";
+google_max_num_ads = "4";
+google_ad_width = 336;
+google_ad_height = 280;
+google_ad_format = "336x280_as";
+google_image_size = "336x280";
+google_ad_type = "text,flash,html";
+google_ad_channel ="7770228814+1079678108+9378541030+7401333398+8628229687";
+var color_bg = 'e6e6e6';
+var color_text = '000000';
+var color_link = '226699';
+var color_border = 'e6e6e6';
+var color_url = '226699';
+
+google_analytics_domain_name = "wordpress.com";
+//--></script>
+<script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/show_ads.js"></script><script src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/test_domain.js"></script><script>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</script><script language="JavaScript1.1" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/ads"></script><div style="margin-top: 15px;"><a href="http://www.google.com/url?ct=abg&amp;q=https://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/%26hl%3Des%26client%3Dca-pub-3443918307802676%26adU%3Dwww.GROUPON.com.ar/buenos_aires%26adT%3DOfertas%2Ben%2BBuenos%2BAires%26gl%3DAR&amp;usg=AFQjCNGn2Al5RqNrZwp7AOrIhIjFhY9MDg" style="border-bottom: medium none; text-decoration: none;">Ads by Google</a><br><div style="display: block; float: left; padding-right: 10px; font-size: 130%; margin: auto;"><a href="s-p:%20Go%20to%20www.GROUPON.com.ar/buenos_aires" onclick="advert_cookie(); window.location='http://googleads.g.doubleclick.net/aclk?sa=l&amp;ai=BuvL6fNtyTLaUKdGgmgeQycDhCMjvtdgB8JDZrBTAjbcBsMwLEAEYASCk7p8GOABQ9_Hl6_v_____AWCh0ISALKABmOzq4gOyARNhc204Ni53b3JkcHJlc3MuY29tugEKMzM2eDI4MF9qc8gBAdoBP2h0dHA6Ly9hc204Ni53b3JkcHJlc3MuY29tLzIwMDkvMDUvMDEvaWVlZS03NTQteS1sb3MtanVlZ29zLTNkL4ACAakCCNOCn0k-tT7IAqj23ROoAwHoAx_oA7QD9QMIAADE&amp;num=1&amp;sig=AGiWqtxYUuhtqdhBArxtGmBKxWVW-WyDKg&amp;client=ca-pub-3443918307802676&amp;adurl=http://www.groupon.com.ar/sites/www.groupon.com.ar/lp/lp/999/index.php%3FCID%3DAR_SEM_2_301_2013_2600_oferta%2520viajes_5362903424'; return false;"><span class="gad-head" style="font-size: 1.2em; font-weight: bold;">Ofertas en Buenos Aires</span></a><br><span style="">Ofertas diarias en los mejores Spas Restaurantes y más, ¡hasta 90% off!<br></span><a href="s-p:%20Go%20to%20www.GROUPON.com.ar/buenos_aires" onclick="advert_cookie(); window.location='http://googleads.g.doubleclick.net/aclk?sa=l&amp;ai=BuvL6fNtyTLaUKdGgmgeQycDhCMjvtdgB8JDZrBTAjbcBsMwLEAEYASCk7p8GOABQ9_Hl6_v_____AWCh0ISALKABmOzq4gOyARNhc204Ni53b3JkcHJlc3MuY29tugEKMzM2eDI4MF9qc8gBAdoBP2h0dHA6Ly9hc204Ni53b3JkcHJlc3MuY29tLzIwMDkvMDUvMDEvaWVlZS03NTQteS1sb3MtanVlZ29zLTNkL4ACAakCCNOCn0k-tT7IAqj23ROoAwHoAx_oA7QD9QMIAADE&amp;num=1&amp;sig=AGiWqtxYUuhtqdhBArxtGmBKxWVW-WyDKg&amp;client=ca-pub-3443918307802676&amp;adurl=http://www.groupon.com.ar/sites/www.groupon.com.ar/lp/lp/999/index.php%3FCID%3DAR_SEM_2_301_2013_2600_oferta%2520viajes_5362903424'; return false;">www.GROUPON.com.ar/buenos_aires</a></div><br clear="all"><br clear="all"></div>
+</div>
+<div style="clear: both;"><br></div>
+<!--/adcode-->
+		                
+                <p class="meta">
+                  
+               		<span class="date">
+                                        <a href="http://asm86.wordpress.com/2009/05/01/">Mayo 1, 2009</a> - <!-- at 20:00 -->
+                  </span>
+                  
+									<span class="postedby">
+	                  Posted by                  
+	               		<a href="http://asm86.wordpress.com/author/asm86/" title="Entradas de asm86">asm86</a> | 
+	                  <a href="http://asm86.wordpress.com/category/uncategorized/" title="Ver todas las entradas en Uncategorized" rel="category tag">Uncategorized</a>					   | <a href="http://es.wordpress.com/tag/binario/" rel="tag">binario</a>, <a href="http://es.wordpress.com/tag/ensamblador/" rel="tag">ensamblador</a>, <a href="http://es.wordpress.com/tag/intel/" rel="tag">intel</a>, <a href="http://es.wordpress.com/tag/programacion/" rel="tag">programación</a>, <a href="http://es.wordpress.com/tag/videojuegos/" rel="tag">videojuegos</a>									</span>
+                  
+                                    
+             		</p>
+              
+              </div>
+                
+              <h2 id="comments">2 comentarios 
+	<a href="#postcomment" title="Dejar un comentario">»</a>
+</h2>
+
+<ol id="commentlist">
+<li class="comment even thread-even depth-1 parent" id="comment-478">
+	<div id="div-comment-478">
+	<p>Que pasó con el dibujo:<br>
+***aqui deberia de ir un dibujo de un flotante de 32 bits***</p>
+<p> |S|EEEEEEEE|MMMMMMMMMMMMMMMMMMMMMMM|</p>
+<p>|31|30&lt;–23|       22 &lt;– 0        |  </p>
+<p>Sería interesante que trates este tema mas a fondo, bueno es sólo una sugerencia.<br>
+Gracias, el blog esta muy interesante..quiero mas y mas conocimiento jeje…</p>
+	<p class="vcard"><cite>
+	<img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/5a3d3439ca3f4e90a35efd4d895fda69.png" class="avatar avatar-16" height="16" width="16">	Comentario 
+	por 
+	<span class="fn">Luis</span> | 
+	Julio 18, 2010 <!-- @ <a href="#comment-478">18:13</a> --> 
+		 | <a rel="nofollow" class="comment-reply-link" href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/?replytocom=478#respond" onclick='return addComment.moveForm("div-comment-478", "478", "respond", "329")'>Responder</a> 
+	</cite></p>
+	</div>
+<ul class="children">
+<li class="comment byuser comment-author-asm86 bypostauthor odd alt depth-2" id="comment-479">
+	<div id="div-comment-479">
+	<p>jeje, sabia que estaba olvidando algo. Que bueno que me lo recuerdas para ponerlo y de una vez profundizar sobre el tema</p>
+	<p class="vcard"><cite>
+	<img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/a8686034fb5be467fb038f1fbdace51f_002.jpeg" class="avatar avatar-16" height="16" width="16">	Comentario 
+	por 
+	<span class="fn">asm86</span> | 
+	Julio 18, 2010 <!-- @ <a href="#comment-479">19:58</a> --> 
+		 | <a rel="nofollow" class="comment-reply-link" href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/?replytocom=479#respond" onclick='return addComment.moveForm("div-comment-479", "479", "respond", "329")'>Responder</a> 
+	</cite></p>
+	</div>
+</li>
+</ul>
+</li>
+</ol>
+
+<div class="navigation">
+	<div class="alignleft"></div>
+	<div class="alignright"></div>
+</div>
+<br>	
+	
+
+<div id="respond">
+<h2 id="postcomment">Dejar un comentario</h2>
+<div id="cancel-comment-reply"><small><a rel="nofollow" id="cancel-comment-reply-link" href="http://asm86.wordpress.com/2009/05/01/ieee-754-y-los-juegos-3d/#respond" style="display: none;">Clic para cancelar respuesta.</a></small></div>
+
+
+<form action="http://asm86.wordpress.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input name="author" id="author" size="22" tabindex="1" type="text">
+<label for="author"><small>Nombre (requerido)</small></label></p>
+
+<p><input name="email" id="email" size="22" tabindex="2" type="text">
+<label for="email"><small>Correo electrónico(requerido)</small></label></p>
+
+<p><input name="url" id="url" size="22" tabindex="3" type="text">
+<label for="url"><small>Sitio Web</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;pre&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="60" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" id="submit" tabindex="5" value="Enviar comentario" type="submit">
+<input name="comment_post_ID" value="329" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p>
+
+<input name="genseq" value="1282595702" type="hidden">
+<p><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe">Recibir siguientes comentarios por correo.</label></p><p><input name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;" tabindex="7" type="checkbox"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Recibir nuevas entradas por email.</label></p>
+</form>
+
+</div>
+              
+              <p class="pagenav"><a href="http://asm86.wordpress.com/2009/04/29/if-for-y-registro-eflags/">« Anterior</a> | <a href="http://asm86.wordpress.com/2009/05/04/unos-cuantos-cientos-de-lineas/">Siguiente »</a></p> 
+						
+                
+          
+      </div>
+
+      
+
+<div id="right">
+<div class="sidebar-about">
+<h2>Lenguaje&nbsp;Ensamblador: </h2>
+<h2><em><span>–¡El mas dificil de dominar de todos los lenguajes de 
+programación en la historia de las computadoras! ¿Serás tú uno de los 
+pocos privilegiados capaces de lograrlo?–</span></em></h2>
+</div>
+
+<div class="subcontainer">
+  <ul class="rightsub">
+<li id="image-4" class="widget widget_image"><h2 class="widgettitle">Escritorio</h2>
+
+<div style="overflow: hidden;"><img src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/rota3d.jpg" class="alignleft" height="240" width="400"></div>
+</li>
+<li id="linkcat-14155" class="widget widget_links"><h2 class="widgettitle">Herramientas</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.flatassembler.net/" title="Descarga gratis el Ensamblador mas eficiente y actualizado de los 3 que he usado" target="_blank">Flat Assembler</a></li>
+<li><a href="http://www.ollydbg.de/" title="Poderoso depurador de codigo que es mejor usar para el bien" target="_blank">OllyDbg</a></li>
+
+	</ul>
+</li>
+
+<li id="linkcat-27504" class="widget widget_links"><h2 class="widgettitle">Informacion</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.ecowin.org/ascii.htm" title="El famosisimo codigo ASCII en una sola tabla" target="_blank">Codigo ASCII</a></li>
+<li><a href="http://www.linuxassembly.org/" title="Como programar en Ensamblador para Linux">Ensamblador en Linux</a></li>
+<li><a href="http://www.intel.com/products/processor/manuals/" title="Manuales de Ensamblador actualizados y gratuitos" target="_blank">Manuales de Intel</a></li>
+<li><a href="http://win32assembly.online.fr/" title="Contiene mucha información sobre Ensamblador para Windows, incluyendo sus famosos tutoriales.">Web de Iczelion</a></li>
+
+	</ul>
+</li>
+
+	<li id="recent-comments" class="widget widget_recent_comments">		<h2 class="widgettitle">Últimos comentarios</h2>
+		<table class="recentcommentsavatar" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td title="asm86" class="recentcommentsavatartop" style="height: 48px; width: 48px;"><a href="http:///" rel="nofollow"><img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/a8686034fb5be467fb038f1fbdace51f.jpeg" class="avatar avatar-48" height="48" width="48"></a></td><td class="recentcommentstexttop"><a href="http:///" rel="nofollow">asm86</a> on <a href="http://asm86.wordpress.com/2010/04/25/poor-programmer-reto-1-parte-6/#comment-485">Poor Programmer Reto 1 Parte…</a></td></tr><tr><td title="elborto" class="recentcommentsavatarend" style="height: 48px; width: 48px;"><img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/9bdc5224f7e5a15f0876a315cf26988e.png" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">elborto on <a href="http://asm86.wordpress.com/2010/04/25/poor-programmer-reto-1-parte-6/#comment-484">Poor Programmer Reto 1 Parte…</a></td></tr><tr><td title="Inzunza" class="recentcommentsavatarend" style="height: 48px; width: 48px;"><img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/dd0350f29d722067faa1e4b6ac8f2623.png" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">Inzunza on <a href="http://asm86.wordpress.com/2010/07/24/informe-asm86003/#comment-482">Informe&nbsp;ASM86[003]</a></td></tr><tr><td title="Luis" class="recentcommentsavatarend" style="height: 48px; width: 48px;"><img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/5a3d3439ca3f4e90a35efd4d895fda69_002.png" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">Luis on <a href="http://asm86.wordpress.com/2009/10/12/ensamblador-desde-cero/#comment-481">Ensamblador Desde&nbsp;Cero</a></td></tr><tr><td title="Luis" class="recentcommentsavatarend" style="height: 48px; width: 48px;"><img alt="" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/5a3d3439ca3f4e90a35efd4d895fda69_002.png" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">Luis on <a href="http://asm86.wordpress.com/2009/06/27/tierra-de-indios/#comment-480">Tierra de&nbsp;Indios</a></td></tr></tbody></table>
+	</li>
+<li id="image-5" class="widget widget_image"><h2 class="widgettitle">Objetivo:</h2>
+
+<div style="overflow: hidden;"><img src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/grid10x10.jpg" class="alignnone"></div>
+</li>
+<li id="twitter-2" class="widget widget_twitter"><h2 class="widgettitle"><a href="http://twitter.com/asm86mario">Mientras tanto en Twitter</a></h2>
+<ul class="tweets">
+<li>Esten pendientes porque esta semana sale un especial de 4 numeros sobre el manejo de estructuras de datos en ensamblador!__<a href="http://twitter.com/asm86mario/statuses/21885902583" class="timesince">16&nbsp;hours&nbsp;ago</a></li>
+<li>Mejor vuelvo a los dibujitos en paint para explicar conceptos de ensamblador en el blog.__<a href="http://twitter.com/asm86mario/statuses/21881597281" class="timesince">17&nbsp;hours&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/chiguire">chiguire</a> y no olvides algunos saleros, muy pocos saben que la sal es el arma definitiva contra los zombies__<a href="http://twitter.com/asm86mario/statuses/21759986803" class="timesince">2&nbsp;days&nbsp;ago</a></li>
+<li>Twitter es como ciertos gobiernos en los que antes de decir algo tienes que voltear a ver quienes te estan siguiendo__<a href="http://twitter.com/asm86mario/statuses/21753998708" class="timesince">2&nbsp;days&nbsp;ago</a></li>
+<li>ACLARACION: La entrevista a la que hace referencia la nota "Chupa Melox" fue la de @<a href="http://twitter.com/floppyradio">floppyradio</a> y no la de la mesa de 'la industria'__<a href="http://twitter.com/asm86mario/statuses/21753301361" class="timesince">2&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/RevistaSG">RevistaSG</a> para el tema de las empresas web rentables seria bueno que analizaran el fracaso de GOOSEHEAD.COM__<a href="http://twitter.com/asm86mario/statuses/21696899653" class="timesince">2&nbsp;days&nbsp;ago</a></li>
+<li>¿Será cierto que la mayor fuente de ingresos de Sabarasa no son los juegos sino las conferencias que imparten Andro y Jochen? @<a href="http://twitter.com/sabarasamx">sabarasamx</a>__<a href="http://twitter.com/asm86mario/statuses/21691164588" class="timesince">3&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/floppyradio">floppyradio</a> @ Suldyn Pues mientras no sean los viejitos de la lemonparty__<a href="http://twitter.com/asm86mario/statuses/21541625642" class="timesince">4&nbsp;days&nbsp;ago</a></li>
+<li>Aqui va un Tweet desde el mismisimo APAC en la sala Multimierda silla 20__<a href="http://twitter.com/asm86mario/statuses/21541514142" class="timesince">4&nbsp;days&nbsp;ago</a></li>
+<li>Me gustan las comunidades de videojuegos independientes, hacen juegos tan buenos como lo que veo en la DSi o WiiWare__<a href="http://twitter.com/asm86mario/statuses/21522918787" class="timesince">4&nbsp;days&nbsp;ago</a></li>
+<li>Hoy estaba de buen humor hasta que se me ocurrio leer la seccion de ofertas de empleo de "la industria"__<a href="http://twitter.com/asm86mario/statuses/21465229082" class="timesince">5&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/_habacuc">_habacuc</a> no quiero imaginar como va a hacer el kinect para manejar los viajes en escobas voladoras en el juego de Harry Potter__<a href="http://twitter.com/asm86mario/statuses/21421203568" class="timesince">6&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/atomix">atomix</a> Google acaba de 
+bloquearlos con un aviso de Reported Attack Page. Y yo que queria opinar
+ en la columna de "la industria" en mexico__<a href="http://twitter.com/asm86mario/statuses/21376915201" class="timesince">6&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/atomix">atomix</a> sigo esperando la columna semanal de "la industria" de videojuegos en Mexico__<a href="http://twitter.com/asm86mario/statuses/21351438279" class="timesince">6&nbsp;days&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/jorgefsb">jorgefsb</a> dile eso de la experiencia y la capacidad de aprender a los Larva-Rasos a ver que opinan__<a href="http://twitter.com/asm86mario/statuses/21345485506" class="timesince">6&nbsp;days&nbsp;ago</a></li>
+<li>Ya esta en linea el nuevo website de la empresa regiomontana de videojuegos Neggi Studio: <a href="http://neggi.mx/" rel="nofollow">http://neggi.mx</a>__<a href="http://twitter.com/asm86mario/statuses/21339854569" class="timesince">1&nbsp;week&nbsp;ago</a></li>
+<li>@<a href="http://twitter.com/shinigaminecro">shinigaminecro</a> lo dices por lo que escribio de los superheroes?__<a href="http://twitter.com/asm86mario/statuses/21324300993" class="timesince">1&nbsp;week&nbsp;ago</a></li>
+<li>A TRES horas TRES del lanzamiento del nuevo juego de Neggi Studio!!!: <a href="http://neggi.mx/" rel="nofollow">http://neggi.mx/</a>__<a href="http://twitter.com/asm86mario/statuses/21319703276" class="timesince">1&nbsp;week&nbsp;ago</a></li>
+<li>A quince horas del lanzamiento del nuevo juego de Neggi Studio!!!: <a href="http://neggi.mx/" rel="nofollow">http://neggi.mx/</a>__<a href="http://twitter.com/asm86mario/statuses/21281097676" class="timesince">1&nbsp;week&nbsp;ago</a></li>
+<li>A solo un dia para que salga publicado el nuevo juego de Neggi Studio:  <a href="http://neggi.mx/" rel="nofollow">http://neggi.mx/</a>__<a href="http://twitter.com/asm86mario/statuses/21238477901" class="timesince">1&nbsp;week&nbsp;ago</a></li>
+</ul>
+</li>
+  </ul>
+    
+  <ul class="rightsub2">
+<li id="image-3" class="widget widget_image"><h2 class="widgettitle">Click Para Contactarme</h2>
+
+<div style="overflow: hidden;"><a href="http://asm86.wordpress.com/contacto"><img src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/9290.jpg" class="alignright" height="240" width="400"></a></div>
+</li>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Entradas recientes</h2>
+		<ul>
+				<li><a href="http://asm86.wordpress.com/2010/08/12/chupa-melox/" title="CHUPA&nbsp;MELOX">CHUPA&nbsp;MELOX</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/08/01/cronica-de-una-caceria/" title="Crónica de una&nbsp;Cacería">Crónica de una&nbsp;Cacería</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/07/24/informe-asm86003/" title="Informe&nbsp;ASM86[003]">Informe&nbsp;ASM86[003]</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/07/21/la-perdida-que-nadie-lloro/" title="La Pérdida que Nadie&nbsp;Lloró">La Pérdida que Nadie&nbsp;Lloró</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/07/15/%c2%bfalguien-vio-tron/" title="¿Alguien vio&nbsp;TRON?">¿Alguien vio&nbsp;TRON?</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/07/04/poor-programmer-episodio-doble/" title="Poor Programmer Episodio&nbsp;Doble">Poor Programmer Episodio&nbsp;Doble</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/06/29/poor-programmer-reto-1-episodio-10-2/" title="Poor Programmer Reto 1 Episodio&nbsp;10">Poor Programmer Reto 1 Episodio&nbsp;10</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/06/21/poor-programmer-reto-1-episodio-10/" title="Poor Programmer Reto 1 Episodio&nbsp;10">Poor Programmer Reto 1 Episodio&nbsp;10</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/06/14/poor-programmer-reto-1-episodio-9/" title="Poor Programmer Reto 1 Episodio&nbsp;9">Poor Programmer Reto 1 Episodio&nbsp;9</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/06/10/constantes-y-valores-inmediatos-en-asm/" title="Constantes y Valores Inmediatos en&nbsp;ASM">Constantes y Valores Inmediatos en&nbsp;ASM</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/06/07/poor-programmer-reto-1-episodio-8/" title="Poor Programmer Reto 1 Episodio&nbsp;8">Poor Programmer Reto 1 Episodio&nbsp;8</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/05/30/afinacion-mayor-de-asm86-wordpress-com/" title="Afinación mayor de&nbsp;asm86.wordpress.com">Afinación mayor de&nbsp;asm86.wordpress.com</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/05/16/programacion-grafica-no-es-lo-mismo-que-arte-digital/" title="Programación Gráfica no es lo mismo que Arte&nbsp;Digital">Programación Gráfica no es lo mismo que Arte&nbsp;Digital</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/05/06/informe-asm86002/" title="Informe&nbsp;ASM86[002]">Informe&nbsp;ASM86[002]</a></li>
+				<li><a href="http://asm86.wordpress.com/2010/04/26/poor-programmer-reto-1-episodio-7/" title="Poor Programmer Reto 1 Episodio&nbsp;7">Poor Programmer Reto 1 Episodio&nbsp;7</a></li>
+				</ul>
+		</li>
+<li id="archives-2" class="widget widget_archive"><h2 class="widgettitle">Entradas Obsoletas:</h2>
+		<select name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;"> <option selected="selected" value="">Seleccionar mes</option> 	<option value="http://asm86.wordpress.com/2010/08/"> Agosto 2010 &nbsp;(2)</option>
+	<option value="http://asm86.wordpress.com/2010/07/"> Julio 2010 &nbsp;(4)</option>
+	<option value="http://asm86.wordpress.com/2010/06/"> Junio 2010 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2010/05/"> Mayo 2010 &nbsp;(3)</option>
+	<option value="http://asm86.wordpress.com/2010/04/"> Abril 2010 &nbsp;(7)</option>
+	<option value="http://asm86.wordpress.com/2010/03/"> Marzo 2010 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2010/02/"> Febrero 2010 &nbsp;(1)</option>
+	<option value="http://asm86.wordpress.com/2010/01/"> Enero 2010 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2009/12/"> Diciembre 2009 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2009/11/"> Noviembre 2009 &nbsp;(12)</option>
+	<option value="http://asm86.wordpress.com/2009/10/"> Octubre 2009 &nbsp;(7)</option>
+	<option value="http://asm86.wordpress.com/2009/09/"> Septiembre 2009 &nbsp;(3)</option>
+	<option value="http://asm86.wordpress.com/2009/08/"> Agosto 2009 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2009/07/"> Julio 2009 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2009/06/"> Junio 2009 &nbsp;(3)</option>
+	<option value="http://asm86.wordpress.com/2009/05/"> Mayo 2009 &nbsp;(7)</option>
+	<option value="http://asm86.wordpress.com/2009/04/"> Abril 2009 &nbsp;(8)</option>
+	<option value="http://asm86.wordpress.com/2009/03/"> Marzo 2009 &nbsp;(5)</option>
+	<option value="http://asm86.wordpress.com/2009/02/"> Febrero 2009 &nbsp;(8)</option>
+	<option value="http://asm86.wordpress.com/2009/01/"> Enero 2009 &nbsp;(28)</option>
+	<option value="http://asm86.wordpress.com/2008/12/"> Diciembre 2008 &nbsp;(12)</option>
+	<option value="http://asm86.wordpress.com/2008/11/"> Noviembre 2008 &nbsp;(8)</option>
+ </select>
+</li>
+<li id="rss-2" class="widget widget_rss"><h2 class="widgettitle"><a class="rsswidget" href="http://asm86.wordpress.com/feed/" title="Suscribirse a este contenido"><img style="background: none repeat scroll 0% 0% orange; color: white; border: medium none;" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/rss.png" alt="RSS" height="14" width="14"></a> <a class="rsswidget" href="http://asm86.wordpress.com/" title="-El Verdadero Lenguaje de las Máquinas-">Programacion en Lenguaje Ensamblador</a></h2>
+<ul><li><a class="rsswidget" href="http://asm86.wordpress.com/2010/08/12/chupa-melox/" title="Creo que yo tambien deberia de contratar a una persona para que &quot;me retoque los botones&quot; de mis interfaces.">CHUPA MELOX</a></li></ul></li>
+		<li id="top-posts" class="widget widget_stats_topposts">			<h2 class="widgettitle">Posts Más Vistos</h2>
+			<ul><li><a href="http://asm86.wordpress.com/about/">Lenguaje Ensamblador:</a></li><li><a href="http://asm86.wordpress.com/2010/05/16/programacion-grafica-no-es-lo-mismo-que-arte-digital/">Programación Gráfica no es lo mismo que Arte Digital</a></li><li><a href="http://asm86.wordpress.com/2008/12/27/%c2%bfcuantos-bits-tiene-un-byte/">¿Cuantos Bits tiene un Byte?</a></li><li><a href="http://asm86.wordpress.com/2008/11/23/juegos-en-ensamblador/">Juegos en ensamblador</a></li><li><a href="http://asm86.wordpress.com/2009/04/16/positivo-y-negativo/">+++ Positivo y Negativo - - -</a></li><li><a href="http://asm86.wordpress.com/2009/04/11/el-circo-de-pulgas/">El Circo de Pulgas</a></li><li><a href="http://asm86.wordpress.com/2009/01/07/manejo-basico-de-la-memoria/">Manejo Básico de la Memoria</a></li><li><a href="http://asm86.wordpress.com/2010/04/12/solo-di-mi-nombre-y-ahi-estare/">Solo di mi nombre y ahí estaré</a></li><li><a href="http://asm86.wordpress.com/2008/12/31/prog-hex-and-rocknroll/">Prog, Hex and Rock'n'Roll</a></li><li><a href="http://asm86.wordpress.com/2010/08/12/chupa-melox/">CHUPA  MELOX</a></li></ul>		</li>
+  </ul>
+</div>
+</div>
+
+      
+<div id="footer">
+	<h2 class="hide">Site info</h2>
+	<span>Programación en Lenguaje Ensamblador</span><br>
+	Theme: Andreas04 by <a href="http://andreasviklund.com/" rel="designer">Andreas Viklund</a>. <a href="http://es.wordpress.com/" rel="generator">Blog de WordPress.com</a>.
+</div>
+
+
+    </div>
+  
+  </div>
+
+
+<script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/wordpress.js"></script>
+<script type="text/javascript">
+var skimlinks_pub_id = "725X1342";
+var skimlinks_sitename = 'asm86.wordpress.com';
+var skimlinks_domain = "go2.wordpress.com";
+skimlinks();
+</script>
+<script type="text/javascript">_qoptions={qacct:'p-18-mFEk4J448M',labels:'language.es'};</script>
+<script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/quant.js"></script>
+<noscript><p><img class="robots-nocontent" src="http://pixel.quantserve.com/pixel/p-18-mFEk4J448M.gif?labels=language.es" style="display:none" height="1" width="1" alt="" /></p></noscript>
+<script type="text/javascript">_acseed='Nm01fCNhbSRLMCEuSnx9cG8/RVksbzdzUXVyYFguU1I/JFddXzFDSXVZem1vJipIfCU/OyBPM3E3N2swe3pyIzs/LGl9VjNyPTotWjcoJGtPQy9scWk0SyV2b3VPWUUkVUI+R31AckFgTDJ8XiVzaCpdRE9ZKnd0TG0yaT5VJTgjTTokWzNMbClYfVJrTmsmNnZ6K3ZZSFRHVl1m';</script>
+<script type="text/javascript" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/beacon.js"></script><script type="text/javascript">try{COMSCORE.beacon({c1:2,c2:7518284});}catch(e){}</script><noscript><p class="robots-nocontent"><img src="http://b.scorecardresearch.com/p?cj=1c1=2&#038;c2=7518284" alt="" style="display:none" width="1" height="1" /></p></noscript><script src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/w.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({'blog':'5462934','v':'wpcom','user_id':'0','post':'329','subd':'asm86'});
+ex_go({'crypt':'RDZ8LFkxbXEvdUJVfjEsMU9fT2owbllsLG9UTTRHVC9Fei1zTzljdGEzV1duRzF2T2hfOS1zTDZ4NnxCZko4QkdWdjNyL1JBfkNJbVh1ZldKM0F+LU1WdDdHNkxWSVZ+LVBkcWRaWlI/bDZwbmVhdXJtfnQ2SWJvUVJwJjdtQU1iS1VGJiszQXd4d0hOMUUxSDhfTFZtSDNCZnVzT2wsMiV3bi1uZF9tV2N1ZE0/RDl+aEklMWEleDA0fF1BX1AxczMvXWNLMXRKX3VFYTl0UWosRElWNSYyVl1CRVhCZnAySE5hPTlwWHZbX2F8aCZldVY9UDhOcSY2Jm8mfk9HdG1TJUYsLDMvSlBrMjU4Yi9haX5NLmtlNkowUHdZekdoPSVzUUVsbC9uUGVoWEwmVGJxLiUwRE4rJkZzMy50JVk9L0Q3REtRMl1KK083Q2hkNSVTS0ZwekhPclYwJXwlSHB3JkxTRGxLdGN8dGI5K1Vbc10rWU43UG53cTVGMCYsMjU/UmJaQWRPSGFmL2VMYVZwPVJfJSV0OF0/aEM='});
+addLoadEvent(function(){linktracker_init('5462934',329);});
+	</script><img id="wpstats" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/g_002.gif" alt=""><img id="wpstats2" src="IEEE%20754%20y%20los%20Juegos%203D%20%C2%AB%20Programaci%C3%B3n%20en%20Lenguaje%20Ensamblador_archivos/g.gif" alt="" style="display: none;">
+
+</body></html>
