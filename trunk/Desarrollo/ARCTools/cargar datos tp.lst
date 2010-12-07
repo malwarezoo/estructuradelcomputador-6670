@@ -1,0 +1,52 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+                                                                         
+                                              .equ 0xA00000F0            !Genera la constante con la direcci�n
+                                              .equ 0xA00000F4            !Genera la constante con la direcci�n
+                                              .equ 2                     !enmascara los 2 bits m�s significativos
+                                              .equ 3                     !enmascara los ultimos 3 bits de L1
+                                                                         
+00000800  0000002048            progl:                                   
+00000804  0000002052  03280000                sethi 2621440, %r1         !toma los 22 bits m�s significativos de la direcci�n L1
+00000808  0000002056  820060f0                add %r1, -536870672, %r1   !sumo los bits menos significativos a r1
+0000080c  0000002060  ca004000                ld %r1, %r5                !obtengo el contenido de r1 en r5
+00000810  0000002064            parseo:                                  
+00000814  0000002068  9131601f                srl %r5, 31, %r8           !tomo el bit m�s significativo lo corro 31 posiciones y lo guardo en r8
+00000818  0000002072  9331601c                srl %r5, 28, %r9           !toma los 4 bits significativos
+0000081c  0000002076  920a6002                and %r9, 2, %r9            !enmascara los 2 bits siguientes al significativo
+00000820  0000002080  94096003                and %r5, 3, %r10           !toma los 3 bits de la ultima posicion de r5
+00000824  0000002084  960aa001                and %r10, 1, %r11          !toma el ultimo bit de r5
+00000828  0000002088  9532a001                srl %r10, 1, %r10          !obtiene los dos anteultimos bits de r5
+0000082c  0000002092            recons:                                  
+00000830  0000002096  912a201f                sll %r8, 31, %r8           
+00000834  0000002100  932a601c                sll %r9, 28, %r9           
+00000838  0000002104  952aa001                sll %r10, 1, %r10          
+0000083c  0000002108  98120009                or %r8, %r9, %r12          
+00000840  0000002112  9813000a                or %r12, %r10, %r12        
+00000844  0000002116  9813000b                or %r12, %r11, %r12        
+00000848  0000002120            grabar:                                  
+0000084c  0000002124  03280000                sethi 2621440, %r1         
+00000850  0000002128  820060f4                add %r1, -536870668, %r1   
+00000854  0000002132  d8204000                st %r12, %r1               
+00000858  0000002136  03280000                sethi 2621440, %r1         !toma los 22 bits m�s significativos de la direcci�n L1
+0000085c  0000002140  820060f4                add %r1, -536870668, %r1   !sumo los bits menos significativos a r1
+00000860  0000002144  cc004000                ld %r1, %r6                !obtengo el contenido de r1 en r5		
+00000864  0000002148  81c3e004                jmpl %r15, 4, %r0          
+                                                                         
+                                              .org L1_start              !empiezo L1 en la direcci�n L1_start	
+a00000f0  1610612496  a0000003  L1:                                      !contenido de L1
+                                              .org L2_start              
+a00000f4  1610612492  00000000  L2:                                      
+
+--- Symbol Table ---
+progl: 2048
+parseo: 2064
+recons: 2092
+L1_start: -1610612496
+L2: -1610612492
+L1: -1610612496
+L2_start: -1610612492
+mask2: 3
+mask1: 2
+grabar: 2120

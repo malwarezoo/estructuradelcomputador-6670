@@ -1,0 +1,35 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+                                                                         
+                                              .equ 0xA00000F8            !constante con la direcci�n
+                                                                         
+                                              .equ 2                     !enmascara los bits que corresponden al boton seleccionado
+                                              .equ 1                     
+                                                                         
+00000800  0000002048            load:                                    
+00000804  0000002052  03280000                sethi 2621440, %r1         !toma los 22 bits m�s significativos de la direcci�n L1
+00000808  0000002056  820060f8                add %r1, -536870664, %r1   !sumo los bits menos significativos a r1
+0000080c  0000002060  ca004000                ld %r1, %r5                !obtengo el contenido de r1 en r5
+00000810  0000002064            parseo:                                  
+00000814  0000002068  a5316005                srl %r5, 5, %r18           !toma el valor de chancho 2
+00000818  0000002072  83316004                srl %r5, 4, %r1            !obtiene bits 4 y 5
+0000081c  0000002076  8328601f                sll %r1, 31, %r1           !elimina lo izq a 4
+00000820  0000002080  a330601f                srl %r1, 31, %r17          !obtiene bit , el chancho 1
+00000824  0000002084  a129601c                sll %r5, 28, %r16          !elimina lo izq a 0..3
+00000828  0000002088  a134201c                srl %r16, 28, %r16         !obtiene bits 0..3
+0000082c  0000002092  81c3e004                jmpl %r15, 4, %r0          
+                                                                         
+                                                                         
+                                              .org dir_start             !empiezo L1 en la direcci�n L1_start	
+a00000f8  1610612488  00000024  L1:                                      !contenido de L1
+                                                                         
+                                                                         
+
+--- Symbol Table ---
+mask1: 1
+parseo: 2064
+L1: -1610612488
+maskBoton: 2
+load: 2048
+dir_start: -1610612488

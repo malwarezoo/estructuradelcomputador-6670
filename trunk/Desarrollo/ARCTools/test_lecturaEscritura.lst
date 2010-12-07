@@ -1,0 +1,45 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                                                         
+                                              .equ 0xA00000F0            !Genera la constante con la direcci<F3>n
+                                              .equ 2                     !enmascara los 2 bits m<E1>s significativos
+                                              .equ 3                     !enmascara los ultimos 3 bits de L1
+                                                                         
+                                                                         ! r5 tiene el Lift Interface
+                                                                         ! r8 tiene el A
+                                                                         ! r9 tiene el F
+                                                                         ! r10 tiene el D
+                                                                         ! r11 tiene el P
+                                                                         
+00000000  0000000000            progl:                                   
+00000004  0000000004  03280000                sethi 2621440, %r1         !toma los 22 bits m<E1>s significativos de la direcci<F3>n L1
+00000008  0000000008  820060f0                add %r1, -536870672, %r1   !sumo los bits menos significativos a r1
+0000000c  0000000012  ca004000                ld %r1, %r5                !obtengo el contenido de r1 en r5
+                                                                         
+                                                                         ! %r5 valor de la Lift Interface (entero)
+00000010  0000000016            parseo:                                  
+00000014  0000000020  9131601f                srl %r5, 31, %r8           !tomo el bit m<E1>s significativo lo corro 31 posiciones y lo guardo en r8
+                                                                         ! %r8 tiene el valor de A
+                                                                         
+00000018  0000000024  93296001                sll %r5, 1, %r9            
+0000001c  0000000028  93326011                srl %r9, 17, %r9           
+                                                                         ! %r9 tiene el F
+                                                                         
+00000020  0000000032  95296010                sll %r5, 16, %r10          
+00000024  0000000036  9532a011                srl %r10, 17, %r10         
+                                                                         ! %r10 tiene el D
+                                                                         
+00000028  0000000040  96096001                and %r5, 1, %r11           
+                                                                         ! %r11 tiene el P
+                                                                         
+                                              .org L1_start              
+a00000f0  1610612496  80040005  L1:                                      
+                                                                         
+
+--- Symbol Table ---
+mask2: 3
+mask1: 2
+parseo: 16
+L1: -1610612496
+progl: 0
+L1_start: -1610612496

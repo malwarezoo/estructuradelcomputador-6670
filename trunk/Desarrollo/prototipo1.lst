@@ -1,0 +1,265 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                                                         
+                                                                         
+                                                                         ! CONSTANTES:
+00000000  0000000000  03938700  MAXTEMP:                                 ! cantidad de ciclos que son 3 segundos
+                                              .equ 0xA00000F8            ! direccion de la botonera
+                                              .equ 0xA00000F0            ! direccion de la lift interface 1
+                                              .equ 0xA00000F4            ! direccion de la lift interface 2
+                                                                         
+                                                                         ! mascaras?
+                                                                         
+                                                                         
+                                                                         ! INIT:
+                                                                         ! ARC Simulator inicializa registros en cero.
+                                                                         ! contador1 <- 0
+                                                                         ! contador2 <- 0
+00000004  0000000004  9602e001                add %r11, 1, %r11          ! ascensor_libre_1 <- 1
+00000008  0000000008  98032001                add %r12, 1, %r12          ! ascensor_libre_2 <- 1
+                                                                         
+                                                                         ! LOOP:
+0000000c  0000000012            loop:                                    
+                                                                         ! leemos las botoneras y los chanchos.
+00000010  0000000016  40000050                call 80                    
+                                                                         
+00000014  0000000020  4000002b                call 43                    
+                                                                         
+                                                                         ! si bits_llamada == 0, ningun ascensor fue llamado
+00000018  0000000024  80a40000                subcc %r16, %r0, %r0       
+                                                                         
+                                                                         ! actualizo los contadores antes del branch
+0000001c  0000000028  9c03a174                add %r14, 372, %r14        ! contador1 += 328 + 40 + 4 ciclos
+00000020  0000000032  9a036175                add %r13, 373, %r13        ! contador2 += 328 + 40 + 4 + 4 ciclos
+                                                                         
+00000024  0000000036  02bffffa                be -6                      ! loop back
+                                                                         
+                                                                         ! ascensores llamados...
+                                                                         ! transformo bits_llamada al piso llamado
+00000028  0000000040  40000042                call 66                    
+                                                                         
+                                                                         ! compongo lo que se escribirá en la Lift Interface seleccionada
+0000002c  0000000044  40000064                call 100                   
+00000030  0000000048  40000053                call 83                    
+                                                                         
+                                                                         ! dependiendo del estado de los ascensores...
+                                                                         
+                                                                         ! si ascensores libres u ocupados simulatáneamente:
+00000034  0000000052  80a3000b                subcc %r12, %r11, %r0      
+                                                                         
+                                                                         ! acumulo los contadores antes del branch
+                                                                         ! actualizo los contadores
+00000038  0000000056  9c03a2b8                add %r14, 696, %r14        ! contador1 += 12 + 620 + 60 + 4 ciclos
+0000003c  0000000060  9a0362b9                add %r13, 697, %r13        ! contador2 += 12 + 620 + 60 + 4 + 4 ciclos
+                                                                         
+00000040  0000000064  02800004                be 4                       
+                                                                         
+                                                                         ! alguno de los dos ascensore está libre
+00000044  0000000068  80a32001                subcc %r12, 1, %r0         
+00000048  0000000072  0280000f                be 15                      
+0000004c  0000000076  10800015                ba 21                      
+                                                                         
+00000050  0000000080            ascensores_igual_estado:                             
+00000054  0000000084  80832000                addcc %r12, 0, %r0         
+00000058  0000000088  12800004                bne 4                      
+                                                                         
+                                                                         ! si los dos ascensores estan ocupados, ignoro la llamada
+0000005c  0000000092  9c03a004                add %r14, 4, %r14          ! contador1 += 4 ciclos
+00000060  0000000096  9a036008                add %r13, 8, %r13          ! contador2 += 4 + 4 ciclos
+00000064  0000000100  10bfffea                ba -22                     ! loop back
+                                                                         
+00000068  0000000104            ambos_ascensores_libres:                             
+                                                                         ! si ambos estan libres se llama al mas cercano
+0000006c  0000000108  40000060                call 96                    
+                                                                         
+                                                                         ! el ascensor a llamar esta en %r21
+00000070  0000000112  80854000                addcc %r21, %r0, %r0       ! 0 para el ascensor1, 1 para el ascensor2
+                                                                         
+00000074  0000000116  9c03a000                add %r14, 0, %r14          ! contador1 += ? + 4 ciclos
+00000078  0000000120  9a036000                add %r13, 0, %r13          ! contador2 += ? + 4 + 4 ciclos
+                                                                         
+0000007c  0000000124  02800002                be 2                       
+00000080  0000000128  10800008                ba 8                       
+                                                                         
+00000084  0000000132            llamar_ascensor_1:                             
+                                                                         ! escribimos a la LIFT1 para llamar
+00000088  0000000136  03280000                sethi 2621440, %r1         
+0000008c  0000000140  820060f0                add %r1, -536870672, %r1   
+00000090  0000000144  ec204000                st %r22, %r1               
+00000094  0000000148  9c03a12c                add %r14, 300, %r14        ! contador1 += 300 ciclos
+00000098  0000000152  9a036130                add %r13, 304, %r13        ! contador2 += 304 ciclos
+0000009c  0000000156  10bfffdc                ba -36                     ! loop back
+                                                                         
+000000a0  0000000160            llamar_ascensor_2:                             
+                                                                         ! escribimos a la LIFT2 para llamar
+000000a4  0000000164  03280000                sethi 2621440, %r1         
+000000a8  0000000168  820060f4                add %r1, -536870668, %r1   
+000000ac  0000000172  ee204000                st %r23, %r1               
+000000b0  0000000176  9c03a12c                add %r14, 300, %r14        ! contador1 += 300 ciclos
+000000b4  0000000180  9a036130                add %r13, 304, %r13        ! contador2 += 304 ciclos
+000000b8  0000000184  10bfffd5                ba -43                     ! loop back
+                                                                         
+                                                                         
+                                                                         
+                                                                         ! LINEA DE RETORNO PARA TODOS
+000000bc  0000000188  81c3e004  return:       jmpl %r15, 4, %r0          
+                                                                         
+                                                                         
+                                                                         
+                                                                         ! FUNCION: leemos contadores, actualizamos ascensor_libre/ocupado (PESO (medio): 40 ciclos)
+000000c0  0000000192            actualizar_ascensores:                             
+                                                                         ! para el ascensor 1
+000000c4  0000000196  80832000                addcc %r12, 0, %r0         
+000000c8  0000000200  02800006                be 6                       
+                                                                         
+                                                                         ! si el ascensor 1 esta libre:
+000000cc  0000000204  9c082000                and %r0, 0, %r14           ! reseteo el contador 1
+000000d0  0000000208  80846000                addcc %r17, 0, %r0         
+000000d4  0000000212  02800009                be 9                       ! cuando el chancho == 1, el ascensor esta ocupado
+000000d8  0000000216  98082000                and %r0, 0, %r12           ! ascensor_libre_1 <- 0
+000000dc  0000000220  10bffff8                ba -8                      
+                                                                         
+000000e0  0000000224            ascensor_1_ocupado:                             
+                                                                         ! si el contador es mayor que MAXTEMP, libero el ascensor
+000000e4  0000000228  80a3a000                subcc %r14, 0, %r0         
+000000e8  0000000232  0c800004                bneg 4                     ! cuando contador1 < MAXTEMP
+000000ec  0000000236  98002001                add %r0, 1, %r12           ! ascensor_libre_1 <- 1
+000000f0  0000000240  9c082000                and %r0, 0, %r14           ! reseteo contador 1
+000000f4  0000000244  10bffff2                ba -14                     
+                                                                         
+000000f8  0000000248            actualizar_ascensor_2:                             
+                                                                         ! para el ascensor 2
+000000fc  0000000252  8082e000                addcc %r11, 0, %r0         
+00000100  0000000256  02800006                be 6                       
+                                                                         
+                                                                         ! si el ascensor 2 esta libre:
+00000104  0000000260  9a082000                and %r0, 0, %r13           ! reseteo el contador 2
+00000108  0000000264  8084a000                addcc %r18, 0, %r0         
+0000010c  0000000268  02bfffec                be -20                     ! cuando el chancho == 1, el ascensor esta ocupado
+00000110  0000000272  9a082000                and %r0, 0, %r13           ! ascensor_libre_2 <- 0
+00000114  0000000276  10bfffea                ba -22                     
+                                                                         
+00000118  0000000280            ascensor_2_ocupado:                             
+                                                                         ! si el contador es mayor que MAXTEMP, libero el ascensor
+0000011c  0000000284  80a36000                subcc %r13, 0, %r0         
+00000120  0000000288  0cbfffe7                bneg -25                   ! cuando contador2 < MAXTEMP
+00000124  0000000292  96002001                add %r0, 1, %r11           ! ascensor_libre_2 <- 1
+00000128  0000000296  9a082000                and %r0, 0, %r13           ! reseteo contador 2
+0000012c  0000000300  10bfffe4                ba -28                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         
+                                                                         ! FUNCION: transforma el numero en bits_llamada en el piso equivalente (PESO: 12 ciclos)
+00000130  0000000304            trans_bits_llamada:                             
+                                                                         ! primero considero el caso en que es 8 (4to bit seteado)
+00000134  0000000308  808c2008                andcc %r16, 8, %r0         
+00000138  0000000312  02800003                be 3                       
+                                                                         ! si no es ocho, basta con hacer un shift a la izquierda
+0000013c  0000000316  a1342001                srl %r16, 1, %r16          
+00000140  0000000320  10bfffdf                ba -33                     
+00000144  0000000324            es_ocho:                                 
+00000148  0000000328  a0002003                add %r0, 3, %r16           
+0000014c  0000000332  10bfffdc                ba -36                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         
+                                                                         ! FUNCION: parsea los valores de la botonera y los chanchos. (PESO: 328 ciclos)
+00000150  0000000336            leer_botonera:                             
+00000154  0000000340  03280000                sethi 2621440, %r1         !toma los 22 bits m�s significativos de la direcci�n L1
+00000158  0000000344  820060f8                add %r1, -536870664, %r1   !sumo los bits menos significativos a r1
+0000015c  0000000348  ca004000                ld %r1, %r5                !obtengo el contenido de r1 en r5
+00000160  0000000352  a5316005                srl %r5, 5, %r18           !toma el valor de chancho 2
+00000164  0000000356  83316004                srl %r5, 4, %r1            !obtiene bits 4 y 5
+00000168  0000000360  8328601f                sll %r1, 31, %r1           !elimina lo izq a 4
+0000016c  0000000364  a330601f                srl %r1, 31, %r17          !obtiene bit , el chancho 1
+00000170  0000000368  a129601c                sll %r5, 28, %r16          !elimina lo izq a 0..3
+00000174  0000000372  a134201c                srl %r16, 28, %r16         !obtiene bits 0..3
+00000178  0000000376  10bfffd1                ba -47                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         
+                                                                         ! FUNCION: compone el A, F y D de cada Lift Interface para escribir (S es cero) (PESO: 60 ciclos)
+0000017c  0000000380            componer_escrituras:                             
+                                                                         ! PARA LA LIFT1 
+00000180  0000000384  82002001                add %r0, 1, %r1            
+00000184  0000000388  8328601f                sll %r1, 31, %r1           ! en r1 esta la parte de A, de la LIFT1
+00000188  0000000392  852c2010                sll %r16, 16, %r2          ! en r2 esta la parte de F, de la LIFT1
+0000018c  0000000396  872e2001                sll %r24, 1, %r3           ! en r3 esta la parte de D, de la LIFT1
+                                                                         ! compongo a_escribir_1 con or sucesivo
+00000190  0000000400  82104002                or %r1, %r2, %r1           
+00000194  0000000404  82104003                or %r1, %r3, %r1           
+00000198  0000000408  ac106001                or %r1, 1, %r22            ! en r22, a_escribir, listo para ir a LIFT1
+                                                                         
+                                                                         ! PARA LA LIFT2
+0000019c  0000000412  82002001                add %r0, 1, %r1            
+000001a0  0000000416  8328601f                sll %r1, 31, %r1           ! en r1 esta la parte de A, de la LIFT1
+000001a4  0000000420  852c2010                sll %r16, 16, %r2          ! en r2 esta la parte de F, de la LIFT1
+000001a8  0000000424  872e6001                sll %r25, 1, %r3           ! en r3 esta la parte de D, de la LIFT1
+                                                                         ! compongo a_escribir_1 con or sucesivo
+000001ac  0000000428  82104002                or %r1, %r2, %r1           
+000001b0  0000000432  82104003                or %r1, %r3, %r1           
+000001b4  0000000436  ae106001                or %r1, 1, %r23            ! en r23, a_escribir, listo para ir a LIFT1
+000001b8  0000000440  10bfffc1                ba -63                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         
+                                                                         ! FUNCION: lee los valores D de las Lift Interface a los registros r24 y r25 (PESO: 620 ciclos)
+000001bc  0000000444            leer_lifts:                              
+000001c0  0000000448  03280000                sethi 2621440, %r1         
+000001c4  0000000452  820060f0                add %r1, -536870672, %r1   
+000001c8  0000000456  ca004000                ld %r1, %r5                !obtengo el contenido de la LIFT1 en r5
+000001cc  0000000460  03280000                sethi 2621440, %r1         
+000001d0  0000000464  820060f4                add %r1, -536870668, %r1   
+000001d4  0000000468  cc004000                ld %r1, %r6                !obtengo el contenido de la LIFT2 en r6
+                                                                         
+                                                                         ! parseo los valores de interes
+000001d8  0000000472  b1296010                sll %r5, 16, %r24          
+000001dc  0000000476  b1362011                srl %r24, 17, %r24         ! %r24 tiene el D del LIFT1
+000001e0  0000000480  b329a010                sll %r6, 16, %r25          
+000001e4  0000000484  b3366011                srl %r25, 17, %r25         ! %r25 tiene el D del LIFT2
+                                                                         
+000001e8  0000000488  10bfffb5                ba -75                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         ! FUNCION: STUB FUNCTION!
+000001ec  0000000492            ascensor_mas_cercano:                             
+000001f0  0000000496  aa002000                add %r0, 0, %r21           
+000001f4  0000000500  10bfffb2                ba -78                     
+                                                                         ! FIN FUNCION
+                                                                         
+                                                                         
+                                                                         
+                                                                         ! para facilitar el acceso (dummy values!)
+                                              .org dir_botonera          
+a00000f8  1610612488  00000002  BOTONERA:                                
+                                              .org dir_L1                
+a00000f0  1610612496  00000008  LIFT1:                                   
+                                              .org dir_L2                
+a00000f4  1610612492  00000002  LIFT2:                                   
+                                                                         
+                                                                         
+
+--- Symbol Table ---
+LIFT2: -1610612492
+LIFT1: -1610612496
+ascensor_mas_cercano: 492
+ambos_ascensores_libres: 104
+trans_bits_llamada: 304
+BOTONERA: -1610612488
+componer_escrituras: 380
+ascensor_2_ocupado: 280
+ascensores_igual_estado: 80
+leer_lifts: 444
+ascensor_1_ocupado: 224
+dir_botonera: -1610612488
+dir_L2: -1610612492
+actualizar_ascensores: 192
+leer_botonera: 336
+dir_L1: -1610612496
+es_ocho: 324
+actualizar_ascensor_2: 248
+return: 188
+MAXTEMP: 0
+llamar_ascensor_2: 160
+loop: 12
+llamar_ascensor_1: 132
