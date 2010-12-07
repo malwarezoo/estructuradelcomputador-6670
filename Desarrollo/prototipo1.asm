@@ -153,7 +153,7 @@ ascensor_2_ocupado:
 trans_bits_llamada:
 		! primero considero el caso en que es 8 (4to bit seteado)
 		andcc	%r16, 8, %r0
-		be	es_ocho
+		bne	es_ocho
 		! si no es ocho, basta con hacer un shift a la izquierda
 		srl	%r16, 1, %r16
 		ba	return
@@ -233,7 +233,7 @@ ascensor_mas_cercano:
 		.org dir_botonera
 BOTONERA:	2
 		.org dir_L1
-LIFT1:		8
+LIFT1:		6
 		.org dir_L2
 LIFT2:		2
 
