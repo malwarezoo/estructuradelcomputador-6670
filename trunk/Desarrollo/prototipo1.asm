@@ -3,7 +3,7 @@
 
 
 		! CONSTANTES:
-MAXTEMP:	60000000	! cantidad de ciclos que son 3 segundos
+MAXTEMP:	3000	! cantidad de ciclos que son 3 segundos
 dir_botonera	.equ 0xA00000F8	! direccion de la botonera
 dir_L1		.equ 0xA00000F0	! direccion de la lift interface 1
 dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
@@ -17,6 +17,7 @@ dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
 					! contador2 <- 0
 		add %r11, 1, %r11 	! ascensor_libre_1 <- 1
 		add %r12, 1, %r12 	! ascensor_libre_2 <- 1
+		ld [MAXTEMP],%r27
 
 		! LOOP:
 loop:
@@ -121,7 +122,7 @@ actualizar_ascensores:
 
 ascensor_1_ocupado:
 		! si el contador es mayor que MAXTEMP, libero el ascensor
-		subcc 	%r14, MAXTEMP, %r0
+		subcc 	%r14, %r27, %r0
 		bneg 	actualizar_ascensor_2	! cuando contador1 < MAXTEMP
 		add	%r0, 1, %r12		! ascensor_libre_1 <- 1
 		and 	%r0, 0, %r14		! reseteo contador 1
@@ -141,7 +142,7 @@ actualizar_ascensor_2:
 
 ascensor_2_ocupado:
 		! si el contador es mayor que MAXTEMP, libero el ascensor
-		subcc 	%r13, MAXTEMP, %r0
+		subcc 	%r13, %r27, %r0
 		bneg 	return			! cuando contador2 < MAXTEMP
 		add	%r0, 1, %r11		! ascensor_libre_2 <- 1
 		and 	%r0, 0, %r13		! reseteo contador 2
@@ -231,7 +232,7 @@ ascensor_mas_cercano:
 
 		! para facilitar el acceso (dummy values!)
 		.org dir_botonera
-BOTONERA:	2
+BOTONERA:	0x00000032
 		.org dir_L1
 LIFT1:		6
 		.org dir_L2
