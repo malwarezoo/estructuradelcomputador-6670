@@ -2,14 +2,17 @@
 		.begin
 		.org 2048
 
-dir_start		.equ 0xA00000F8	!constante con la direcci�n
 
-maskBoton		.equ 2			!enmascara los bits que corresponden al boton seleccionado
-mask1			.equ 1
+store:
+	sethi	%hi(DUMMY), %r1
+	add 	%r1, %lo(DUMMY), %r1
+	add 	%r0, 1, %r2
+	st	%r2, %r1
+
 
 load: 
-	sethi 		%hi(L1), %r1 		!toma los 22 bits m�s significativos de la direcci�n L1
-	add 		%r1,%lo(L1),%r1 	!sumo los bits menos significativos a r1
+	sethi 		%hi(DUMMY), %r1 		!toma los 22 bits m�s significativos de la direcci�n L1
+	add 		%r1,%lo(DUMMY),%r1 	!sumo los bits menos significativos a r1
 	ld 		%r1,%r5    		!obtengo el contenido de r1 en r5
 parseo:
 	srl		%r5,5,%r18		!toma el valor de chancho 2
@@ -20,9 +23,8 @@ parseo:
 	srl		%r16,28,%r16		!obtiene bits 0..3
 	jmpl 		%r15 + 4, %r0
 	
-	
-	.org dir_start 		!empiezo L1 en la direcci�n L1_start	
-L1:	0x00000024			!contenido de L1
-
+L1   		.equ 0xA00000F8	!constante con la direcci�n	
+	.org L1
+DUMMY:	31337
 
 		.end
