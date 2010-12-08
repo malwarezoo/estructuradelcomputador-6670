@@ -1,0 +1,107 @@
+Clock
+Begin
+  Frequency 2.0E7
+End
+
+Instructions
+Begin
+  Default 4.0
+  Cat Arithmetic 4.0
+    Instr add true 4.0
+    Instr addcc true 4.0
+    Instr sub true 4.0
+    Instr subcc true 4.0
+    Instr and true 4.0
+    Instr andn true 4.0
+    Instr or true 4.0
+    Instr orn true 4.0
+    Instr xor true 4.0
+    Instr xnor true 4.0
+    Instr andcc true 4.0
+    Instr andncc true 4.0
+    Instr orcc true 4.0
+    Instr orncc true 4.0
+    Instr xorcc true 4.0
+    Instr xnorcc true 4.0
+  Cat Shift 4.0
+    Instr sll true 4.0
+    Instr sra true 4.0
+    Instr srl true 4.0
+  Cat Memory 100.0
+    Instr ld true 4.0
+    Instr ldsb true 4.0
+    Instr ldsh true 4.0
+    Instr ldub true 4.0
+    Instr lduh true 4.0
+    Instr st true 4.0
+    Instr stb true 4.0
+    Instr sth true 4.0
+  Cat Branch 4.0
+    Instr ba true 4.0
+    Instr bn true 4.0
+    Instr bne true 4.0
+    Instr be true 4.0
+    Instr bg true 4.0
+    Instr ble true 4.0
+    Instr bge true 4.0
+    Instr bl true 4.0
+    Instr bgu true 4.0
+    Instr bleu true 4.0
+    Instr bcc true 4.0
+    Instr bcs true 4.0
+    Instr bpos true 4.0
+    Instr bneg true 4.0
+    Instr bvc true 4.0
+    Instr bvs true 4.0
+  Cat Misc 4.0
+    Instr sethi false 4.0
+    Instr nop false 4.0
+    Instr call false 4.0
+    Instr jmpl false 4.0
+    Instr rd false 4.0
+    Instr wr false 4.0
+    Instr ta false 4.0
+    Instr rett false 4.0
+End
+
+Memory
+Begin
+  MemRead 100.0
+  MemWrite 100.0
+End
+
+CRT
+Begin
+  CRTReadyTime 50.0
+End
+
+L1Cache
+Begin
+  Enabled false
+  CacheSize 4096
+  BlockSize 32
+  BusWidth 32
+  Associativity 1
+  ReplacementAlgorithm 0
+  ReadHitTime 1.0
+  ReadMissTime 1.0
+  WriteTime 1.0
+  WritePolicy 0
+  WriteAllocation 1
+End
+
+L2Cache
+Begin
+  Enabled false
+  CacheSize 65536
+  BlockSize 32
+  BusWidth 32
+  Associativity 2
+  ReplacementAlgorithm 0
+  ReadHitTime 5.0
+  ReadMissTime 5.0
+  WriteTime 5.0
+  WritePolicy 0
+  WriteAllocation 1
+End
+
