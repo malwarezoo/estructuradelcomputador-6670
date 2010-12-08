@@ -8,8 +8,6 @@ dir_botonera	.equ 0xA00000F8	! direccion de la botonera
 dir_L1		.equ 0xA00000F0	! direccion de la lift interface 1
 dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
 
-		! mascaras?
-
 
 		! INIT:
 		! ARC Simulator inicializa registros en cero.
@@ -30,9 +28,9 @@ loop:
 
 		! actualizo los contadores antes del branch
 		add	%r14, 372, %r14	! contador1 += 328 + 40 + 4 ciclos
-		add	%r13, 373, %r13	! contador2 += 328 + 40 + 4 + 4 ciclos
+		add	%r13, 376, %r13	! contador2 += 328 + 40 + 4 + 4 ciclos
 
-		be	loop		! loop back
+		be	loop		! LOOP BACK
 
 		! ascensores llamados...
 		! transformo bits_llamada al piso llamado
@@ -50,7 +48,7 @@ loop:
 		! acumulo los contadores antes del branch
 		! actualizo los contadores
 		add	%r14, 696, %r14	! contador1 += 12 + 620 + 60 + 4 ciclos
-		add	%r13, 697, %r13	! contador2 += 12 + 620 + 60 + 4 + 4 ciclos
+		add	%r13, 700, %r13	! contador2 += 12 + 620 + 60 + 4 + 4 ciclos
 
 		be ascensores_igual_estado
 
@@ -66,7 +64,7 @@ ascensores_igual_estado:
 		! si los dos ascensores estan ocupados, ignoro la llamada
 		add	%r14, 4, %r14	! contador1 += 4 ciclos
 		add	%r13, 8, %r13	! contador2 += 4 + 4 ciclos
-		ba	loop		! loop back
+		ba	loop		! LOOP BACK
 
 ambos_ascensores_libres:
 		! si ambos estan libres se llama al mas cercano
@@ -75,8 +73,8 @@ ambos_ascensores_libres:
 		! el ascensor a llamar esta en %r21
 		addcc	%r21, %r0, %r0	! 0 para el ascensor1, 1 para el ascensor2
 
-		add	%r14, 0, %r14	! contador1 += ? + 4 ciclos
-		add	%r13, 0, %r13	! contador2 += ? + 4 + 4 ciclos
+		add	%r14, 36, %r14	! contador1 += 32 + 4 ciclos
+		add	%r13, 40, %r13	! contador2 += 32+ 4 + 4 ciclos
 		
 		be	llamar_ascensor_1
 		ba	llamar_ascensor_2
@@ -87,8 +85,8 @@ llamar_ascensor_1:
 		add	%r1, %lo(LIFT1), %r1
 		st	%r22, %r1
 		add	%r14, 300, %r14	! contador1 += 300 ciclos
-		add	%r13, 304, %r13	! contador2 += 304 ciclos
-		ba	loop		! loop back
+		add	%r13, 304, %r13	! contador2 += 300 + 4 ciclos
+		ba	loop		! LOOP BACK
 
 llamar_ascensor_2:
 		! escribimos a la LIFT2 para llamar
@@ -96,12 +94,12 @@ llamar_ascensor_2:
 		add	%r1, %lo(LIFT2), %r1
 		st	%r23, %r1
 		add 	%r14, 300, %r14	! contador1 += 300 ciclos
-		add 	%r13, 304, %r13	! contador2 += 304 ciclos
-		ba 	loop		! loop back
+		add 	%r13, 304, %r13	! contador2 += 300 + 4 ciclos
+		ba 	loop		! LOOP BACK
 
 
 
-! LINEA DE RETORNO PARA TODOS
+! LINEA DE RETORNO PARA TODAS LAS FUNCIONES (hipotesis: ninguna funcion anidada)
 return:		jmpl	%r15 + 4, %r0
 
 
@@ -194,11 +192,11 @@ componer_escrituras:
 		add 	%r0, 1, %r1
 		sll	%r1, 31, %r1		! en r1 esta la parte de A, de la LIFT1
 		sll	%r16, 16, %r2		! en r2 esta la parte de F, de la LIFT1
-		sll	%r25, 1, %r3		! en r3 esta la parte de D, de la LIFT1
+		sll	%r25, 0, %r3		! en r3 esta la parte de D, de la LIFT1
 		! compongo a_escribir_2 con or sucesivo
 		or	%r1, %r2, %r1
 		or	%r1, %r3, %r1
-		or	%r1, 1, %r23		! en r23, a_escribir, listo para ir a LIFT1
+		or	%r1, 0, %r23		! en r23, a_escribir, listo para ir a LIFT1
 		ba 	return
 ! FIN FUNCION
 
@@ -220,21 +218,45 @@ leer_lifts:
 ! FIN FUNCION
 
 
-! FUNCION: STUB FUNCTION!
+! FUNCION: si ambos ascensores estan libres, decide cual llamar (PESO (medio): 32 ciclos)
 ascensor_mas_cercano:
-	add	%r0, 0, %r21	
-	ba	return
+		! ENTRADA: %r24 tiene el piso en que se encuentra (libre) el ascensor 1
+		! ENTRADA: %r25 tiene el piso en que se encuentra (libre) el ascensor 2
+		! ENTRADA: %r16 tiene el piso en que se produzco la llamada.
+		! SALIDA:  %r21 tiene el ascensor al cual llamar: 0 para el asc1 y 1 para el asc2
+
+		! obtengo la distancia absoluta entre el ascensor 1 y el piso de llamada
+		subcc	%r24, %r16, %r1		! %r1 tiene la distancia con signo del ascensor 1
+		bneg	dist_abs_1
+sigo_1:		subcc	%r25, %r16, %r2		! %r2 tiene la distancia con signo del ascensor 2		
+		bneg	dist_abs_2
+sigo_2:		subcc	%r2, %r1, %r0		! %r2 - %r1 < 0  =>  r1 esta mas lejos.
+		bneg	seteo_ascensor_2
+		add	%r0, 0, %r21		! seteo para llamar al ascensor 1
+		ba	return
+seteo_ascensor_2:
+		add	%r0, 1, %r21		! seteo para llamar al ascensor 2
+		ba	return
+
+dist_abs_1:	! si %r1 tiene un numero negativo le resto dos veces si mismo
+		sll	%r1, 1, %r3		! %r3 <- %r2 * 2
+		sub	%r1, %r3, %r1		! %r1 <- %r1 - %r3
+		ba	sigo_1
+dist_abs_2:	! si %r2 tiene un numero negativo le resto dos veces si mismo
+		sll	%r2, 1, %r3		! %r3 <- %r2 * 2
+		sub	%r2, %r3, %r2		! %r2 <- %r2 - %r3
+		ba	sigo_2
 ! FIN FUNCION
 
 
 
 		! para facilitar el acceso (dummy values!)
 		.org dir_botonera
-BOTONERA:	0x00000032
+BOTONERA:	0x00000002	! ambos ascensores libres, y llamado desde PB
 		.org dir_L1
-LIFT1:		6
+LIFT1:		6		! el ascensor 1 esta en 2do piso
 		.org dir_L2
-LIFT2:		2
+LIFT2:		2		! el ascensor 2 esta en PB
 
 
 		.end
