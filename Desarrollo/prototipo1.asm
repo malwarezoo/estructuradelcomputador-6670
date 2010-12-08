@@ -3,7 +3,7 @@
 
 
 		! CONSTANTES:
-MAXTEMP:	3000	! cantidad de ciclos que son 3 segundos
+MAXTEMP:	3000		! cantidad de ciclos que son 3 segundos
 dir_botonera	.equ 0xA00000F8	! direccion de la botonera
 dir_L1		.equ 0xA00000F0	! direccion de la lift interface 1
 dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
@@ -15,95 +15,95 @@ dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
 		! ARC Simulator inicializa registros en cero.
 					! contador1 <- 0
 					! contador2 <- 0
-		add %r11, 1, %r11 	! ascensor_libre_1 <- 1
-		add %r12, 1, %r12 	! ascensor_libre_2 <- 1
-		ld [MAXTEMP],%r27
+		add	%r11, 1, %r11 	! ascensor_libre_1 <- 1
+		add	%r12, 1, %r12 	! ascensor_libre_2 <- 1
+		ld	[MAXTEMP],%r27
 
 		! LOOP:
 loop:
 		! leemos las botoneras y los chanchos.
-		call leer_botonera
+		call	leer_botonera
 
-		call actualizar_ascensores
+		call	actualizar_ascensores
 		
 		! si bits_llamada == 0, ningun ascensor fue llamado
-		subcc %r16, %r0, %r0
+		subcc	%r16, %r0, %r0
 
 		! actualizo los contadores antes del branch
-		add %r14, 372, %r14	! contador1 += 328 + 40 + 4 ciclos
-		add %r13, 373, %r13	! contador2 += 328 + 40 + 4 + 4 ciclos
+		add	%r14, 372, %r14	! contador1 += 328 + 40 + 4 ciclos
+		add	%r13, 373, %r13	! contador2 += 328 + 40 + 4 + 4 ciclos
 
-		be loop			! loop back
+		be	loop		! loop back
 
 		! ascensores llamados...
 		! transformo bits_llamada al piso llamado
-		call trans_bits_llamada
+		call	trans_bits_llamada
 
 		! compongo lo que se escribirá en la Lift Interface seleccionada
-		call leer_lifts
-		call componer_escrituras
+		call	leer_lifts
+		call	componer_escrituras
 
 		! dependiendo del estado de los ascensores...
 
 		! si ascensores libres u ocupados simulatáneamente:
-		subcc %r12, %r11, %r0
+		subcc	%r12, %r11, %r0
 
 		! acumulo los contadores antes del branch
 		! actualizo los contadores
-		add %r14, 696, %r14	! contador1 += 12 + 620 + 60 + 4 ciclos
-		add %r13, 697, %r13	! contador2 += 12 + 620 + 60 + 4 + 4 ciclos
+		add	%r14, 696, %r14	! contador1 += 12 + 620 + 60 + 4 ciclos
+		add	%r13, 697, %r13	! contador2 += 12 + 620 + 60 + 4 + 4 ciclos
 
 		be ascensores_igual_estado
 
 		! alguno de los dos ascensore está libre
-		subcc %r12, 1, %r0
-		be llamar_ascensor_1
-		ba llamar_ascensor_2
+		subcc	%r12, 1, %r0
+		be	llamar_ascensor_1
+		ba	llamar_ascensor_2
 
 ascensores_igual_estado:
-		addcc %r12, 0, %r0
-		bne ambos_ascensores_libres
+		addcc	%r12, 0, %r0
+		bne	ambos_ascensores_libres
 
 		! si los dos ascensores estan ocupados, ignoro la llamada
-		add %r14, 4, %r14	! contador1 += 4 ciclos
-		add %r13, 8, %r13	! contador2 += 4 + 4 ciclos
-		ba loop			! loop back
+		add	%r14, 4, %r14	! contador1 += 4 ciclos
+		add	%r13, 8, %r13	! contador2 += 4 + 4 ciclos
+		ba	loop		! loop back
 
 ambos_ascensores_libres:
 		! si ambos estan libres se llama al mas cercano
-		call ascensor_mas_cercano
+		call	ascensor_mas_cercano
 		
 		! el ascensor a llamar esta en %r21
-		addcc %r21, %r0, %r0	! 0 para el ascensor1, 1 para el ascensor2
+		addcc	%r21, %r0, %r0	! 0 para el ascensor1, 1 para el ascensor2
 
-		add %r14, 0, %r14	! contador1 += ? + 4 ciclos
-		add %r13, 0, %r13	! contador2 += ? + 4 + 4 ciclos
+		add	%r14, 0, %r14	! contador1 += ? + 4 ciclos
+		add	%r13, 0, %r13	! contador2 += ? + 4 + 4 ciclos
 		
-		be llamar_ascensor_1
-		ba llamar_ascensor_2
+		be	llamar_ascensor_1
+		ba	llamar_ascensor_2
 		
 llamar_ascensor_1:
 		! escribimos a la LIFT1 para llamar
 		sethi	%hi(LIFT1), %r1
 		add	%r1, %lo(LIFT1), %r1
 		st	%r22, %r1
-		add %r14, 300, %r14	! contador1 += 300 ciclos
-		add %r13, 304, %r13	! contador2 += 304 ciclos
-		ba loop			! loop back
+		add	%r14, 300, %r14	! contador1 += 300 ciclos
+		add	%r13, 304, %r13	! contador2 += 304 ciclos
+		ba	loop		! loop back
 
 llamar_ascensor_2:
 		! escribimos a la LIFT2 para llamar
 		sethi	%hi(LIFT2), %r1
 		add	%r1, %lo(LIFT2), %r1
 		st	%r23, %r1
-		add %r14, 300, %r14	! contador1 += 300 ciclos
-		add %r13, 304, %r13	! contador2 += 304 ciclos
-		ba loop			! loop back
+		add 	%r14, 300, %r14	! contador1 += 300 ciclos
+		add 	%r13, 304, %r13	! contador2 += 304 ciclos
+		ba 	loop		! loop back
 
 
 
 ! LINEA DE RETORNO PARA TODOS
-return:		jmpl %r15 + 4, %r0
+return:		jmpl	%r15 + 4, %r0
 
 
 
@@ -206,25 +206,24 @@ componer_escrituras:
 
 ! FUNCION: lee los valores D de las Lift Interface a los registros r24 y r25 (PESO: 620 ciclos)
 leer_lifts: 
-        sethi           %hi(LIFT1), %r1
-        add             %r1,%lo(LIFT1),%r1
-        ld              %r1,%r5			!obtengo el contenido de la LIFT1 en r5
-        sethi           %hi(LIFT2), %r1
-        add             %r1,%lo(LIFT2),%r1
-        ld              %r1,%r6			!obtengo el contenido de la LIFT2 en r6
-
-	! parseo los valores de interes
-	sll		%r5, 16, %r24
-	srl		%r24, 17, %r24		! %r24 tiene el D del LIFT1
-	sll		%r6, 16, %r25
-	srl		%r25, 17, %r25		! %r25 tiene el D del LIFT2
-
-	ba		return
+		sethi	%hi(LIFT1), %r1
+		add	%r1,%lo(LIFT1),%r1
+		ld	%r1,%r5			!obtengo el contenido de la LIFT1 en r5	
+		sethi	%hi(LIFT2), %r1
+		add	%r1,%lo(LIFT2),%r1
+		ld	%r1,%r6			!obtengo el contenido de la LIFT2 en r6
+		! parseo los valores de interes
+		sll	%r5, 16, %r24
+		srl	%r24, 17, %r24		! %r24 tiene el D del LIFT1
+		sll	%r6, 16, %r25
+		srl	%r25, 17, %r25		! %r25 tiene el D del LIFT2
+		ba	return
 ! FIN FUNCION
+
 
 ! FUNCION: STUB FUNCTION!
 ascensor_mas_cercano:
-	add	%r0, 0, %r21
+	add	%r0, 0, %r21	
 	ba	return
 ! FIN FUNCION
 
