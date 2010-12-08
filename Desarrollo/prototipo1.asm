@@ -19,7 +19,6 @@ dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
 		add	%r12, 1, %r12 	! ascensor_libre_2 <- 1
 		ld	[MAXTEMP],%r27
 
-		! LOOP:
 loop:
 		! leemos las botoneras y los chanchos.
 		call	leer_botonera
@@ -109,24 +108,24 @@ return:		jmpl	%r15 + 4, %r0
 
 ! FUNCION: leemos contadores, actualizamos ascensor_libre/ocupado (PESO (medio): 40 ciclos)
 actualizar_ascensores:
-		! para el ascensor 1
+		! empiezo con el ascensor 1
 		addcc 	%r12, 0, %r0
 		be 	ascensor_1_ocupado
 		
 		! si el ascensor 1 esta libre:
 		and	%r0, 0, %r14		! reseteo el contador 1
-		addcc	%r17, 0, %r0
-		be	actualizar_ascensor_2 	! cuando el chancho == 1, el ascensor esta ocupado
-		and	%r0, 0, %r12		! ascensor_libre_1 <- 0
-		ba	return
+		addcc	%r17, 0, %r0		! si el chancho_1 esta apagado, nada mas que hacer
+		be	actualizar_ascensor_2
+		and	%r0, 0, %r12		! chancho_1 prendido, apago ascensor_libre_1
+		ba	actualizar_ascensor_2	! termine con el ascensor 1
 
 ascensor_1_ocupado:
 		! si el contador es mayor que MAXTEMP, libero el ascensor
 		subcc 	%r14, %r27, %r0
 		bneg 	actualizar_ascensor_2	! cuando contador1 < MAXTEMP
-		add	%r0, 1, %r12		! ascensor_libre_1 <- 1
+		add	%r0, 1, %r12		! prendo ascensor_libre_1
 		and 	%r0, 0, %r14		! reseteo contador 1
-		ba	return
+		! ascensor 1 terminado, seguimos con el 2
 
 actualizar_ascensor_2:
 		! para el ascensor 2
@@ -135,10 +134,10 @@ actualizar_ascensor_2:
 		
 		! si el ascensor 2 esta libre:
 		and	%r0, 0, %r13		! reseteo el contador 2
-		addcc	%r18, 0, %r0
-		be	return		 	! cuando el chancho == 1, el ascensor esta ocupado
-		and	%r0, 0, %r13		! ascensor_libre_2 <- 0
-		ba	return
+		addcc	%r18, 0, %r0		! si chancho_2 esta apagado, nada mas que hacer
+		be	return
+		and	%r0, 0, %r11		! chancho_2 prendido, apago ascensor_libre_2
+		ba	return			! termino con ambos ascensores
 
 ascensor_2_ocupado:
 		! si el contador es mayor que MAXTEMP, libero el ascensor
