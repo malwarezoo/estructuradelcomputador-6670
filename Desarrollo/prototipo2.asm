@@ -7,6 +7,7 @@ MAXTEMP:	3000		! cantidad de ciclos que son 3 segundos
 dir_botonera	.equ 0xA00000F8	! direccion de la botonera
 dir_L1		.equ 0xA00000F0	! direccion de la lift interface 1
 dir_L2 		.equ 0xA00000F4	! direccion de la lift interface 2
+dir_luces	.equ 0xA00000FC ! direccion de las luces
 
 
 		! INIT:
@@ -22,13 +23,14 @@ loop:
 		call	leer_botonera
 
 		call	actualizar_ascensores
+		call	actualizar_luces
 		
 		! si bits_llamada == 0, ningun ascensor fue llamado
 		subcc	%r16, %r0, %r0
 
 		! actualizo los contadores antes del branch
-		add	%r14, 372, %r14	! contador1 += 328 + 40 + 4 ciclos
-		add	%r13, 376, %r13	! contador2 += 328 + 40 + 4 + 4 ciclos
+		add	%r14, 698, %r14	! contador1 += 328 + 40 + 326 + 4 ciclos
+		add	%r13, 702, %r13	! contador2 += 328 + 40 + 326 + 4 + 4 ciclos
 
 		be	loop		! LOOP BACK
 
@@ -232,7 +234,7 @@ sigo_1:		subcc	%r25, %r16, %r2		! %r2 tiene la distancia con signo del ascensor 
 		bneg	dist_abs_2
 sigo_2:		subcc	%r2, %r1, %r0		! %r2 - %r1 < 0  =>  r1 esta mas lejos.
 		bneg	seteo_ascensor_2
-		add	%r0, 0, %r21		! seteo para llamar al ascensor 1
+		add	%r0, %r0, %r21		! seteo para llamar al ascensor 1
 		ba	return
 seteo_ascensor_2:
 		add	%r0, 1, %r21		! seteo para llamar al ascensor 2
@@ -249,6 +251,27 @@ dist_abs_2:	! si %r2 tiene un numero negativo le resto dos veces si mismo
 ! FIN FUNCION
 
 
+! FUNCION: las luces estan apagadas a menos que se llame a un ascensor (PESO (medio): 326 ciclos)
+actualizar_luces:
+		and	%r0, %r0, %r20		! comienzo en cero
+		andcc	%r12, %r11, %r0
+		bn	escribir_luces		! branch si ambos ascensores estan libres
+		or	%r0, 4, %r20		! algun ascensor en uso, prendo el pulsador
+
+		orcc	%r12, 0, %r0
+		bn	prender_asc1		! branch si el ascensor 1 esta libre
+sigo_luces:	orcc	%r11, 0, %r0
+		or	%r20, 2, %r20		! prendo la luz del ascensor 2
+		ba	escribir_luces
+prender_asc1:	or	%r21, 1, %r20		! prendo la luz del ascensor 1
+		ba	sigo_luces		! sigo con el ascensor 2
+
+escribir_luces:	! %r20 tiene lo que hay que escribir en dir_luces
+		sethi	%hi(LUCES), %r1
+		add	%r1, %lo(LUCES), %r1
+		st	%r20, %r1
+		ba	return
+! FIN FUNCION
 
 		! para facilitar el acceso (dummy values!)
 		.org dir_botonera
@@ -257,6 +280,8 @@ BOTONERA:	0x00000002	! ambos ascensores libres, y llamado desde PB
 LIFT1:		6		! el ascensor 1 esta en 2do piso
 		.org dir_L2
 LIFT2:		2		! el ascensor 2 esta en PB
+		.org dir_luces
+LUCES:		0		! ambos ascensores libres, luces apagadas
 
 
 		.end
