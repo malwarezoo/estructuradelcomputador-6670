@@ -1,0 +1,71 @@
+     Programa de minimización MCBOOLE
+ 
+     Ejecutar escribiendo:  
+
+                    MCBOOLE EX1.IN EX1.OUT <ENTER> 
+    
+     (El primer nombre es el fichero de entrada, el segundo el de
+     salida que contendrá la función minimizada)
+
+     Si necesitas ayuda puedes teclear:
+   
+                       MCBOOLE -help <ENTER> 
+                       
+     donde veras una lista de opciones cuando se ejecuta MCBOOLE.
+
+     El fichero de entrada debe consistir en dos columnas de
+     configuraciones binarias. Estas deben estar separadas por un
+     espacio.
+
+     La columna de la izquierda lista los minterms. La posicion 
+     de cada bit hace referencia a una variable de entrada
+     diferente.
+    
+     La columna de la derecha describe el papel que cada uno de
+     estos productos juega en las funciones de salida. Cada bit 
+     de la derecha hace referencia a una funcion de salida 
+     diferente. Un 1 indicaria que pertenece a una funcion, un 0
+     que no y una d, que es redundante. 
+
+     El siguiente ejemplo resuelve un problema de minimizacion de
+     multiples salidas:
+
+             F(ABCD) = m(3,5,7,13,) + d(1,15)
+             W(ABCD) = m(1,3,13,11)  + d(0,5,7)
+     
+     En el fichero de texto de entrada deberiamos colocar:
+            
+     0001 d1  
+     0101 1d     
+     0111 1d  
+     1101 11
+     1111 d0
+     0011 11     
+     1011 01     
+
+     El nombre de variables y funciones se sobreentiende y no
+     se pone.Asi, en la columna de la dercha tenmos toso los
+     minterms en la forma ABCD, y en la de la derecha las 
+     salidas de las dos funciones: F y G.
+
+**************************************************************
+
+     El fichero de salida, (EX1.OUT) que genera el programa sera:
+     
+     /*
+     ABCD FW
+     */
+
+     x101 11
+     x011 01
+     0xx1 11
+ 
+     Este resultado puede ser interpretado como:
+
+        F = B*/C*D + /A*D 
+        W = B*/C*D + /B*C*D + /A*D
+
+     donde la barra "/", hace referencia al complementario.
+
+******************************************************************
+Manuel Arbelo

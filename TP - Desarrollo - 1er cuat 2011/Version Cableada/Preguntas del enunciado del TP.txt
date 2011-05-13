@@ -1,0 +1,11 @@
+Para proteger el aparato de bombeo, un sensor de nivel indica si hay suficiente agua en
+el reservorio como para que la bomba opere al menos por 10 minutos.
+
+¿Esto significa que el reservorio no posee un indicador de lleno o vacío sino que posee un indicador que nos indica que la bomba puede funcionar por 10' sin problemas?
+
+Las únicas referencias de tiempo disponibles son una señal de 50 Hz (1/20 mSeg) derivada
+de la frecuencia de red de potencia que alimenta al motor de la bomba y una señal de reloj de
+50MHz (1/20 nSeg) obtenida de un oscilador con un cristal de cuarzo.
+
+No entiendo por que sugieren la frecuencia de la señal de la red de potencia como referencia de tiempo si
+esta disponible una señal de reloj de 50MHz.  
