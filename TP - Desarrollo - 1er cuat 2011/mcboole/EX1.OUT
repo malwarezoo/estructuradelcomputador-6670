@@ -1,27 +1,25 @@
 /*
 
-McBOOLE : CPU time 0s, 38 nodes, var : in 7 out 5 literal : in 266 out 56
+McBOOLE : CPU time 0s, 48 nodes, var : in 7 out 5 literal : in 336 out 32
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 5 prime implicants
+McBOOLE : CPU time 0s, The function has 2 prime implicants
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 4 essential PI
+McBOOLE : CPU time 0s, The function has 2 essential PI
 */
 /*
 
-McBOOLE : CPU time 0s, The solution contains 4 nodes
+McBOOLE : CPU time 0s, The solution contains 2 nodes
 */
 /*
 
-McBOOLE : CPU time 0s, Final solution, literal : 16 input 5 output
+McBOOLE : CPU time 0s, Final solution, literal : 10 input 7 output
 */
-1xxxx1x 00010
-0x11000 00101
-01xx001 00001
-1xxxx11 00001
+0x11000 01111
+0xxx101 10011
 /*
 
 McBOOLE : total CPU time 0, end, max branching depth reached : 0
