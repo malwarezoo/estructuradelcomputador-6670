@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<csv_data_records source="C:\Users\Nono\Desktop\Estructura del computador\TP - Desarrollo - 1er cuat 2011\mcboole\EX1.IN.csv">
+     <record num="1">
+          <parametros>10000</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="2">
+          <parametros>10001</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="3">
+          <parametros>10010</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="4">
+          <parametros>10011</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="5">
+          <parametros>10100</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="6">
+          <parametros>10101</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="7">
+          <parametros>10110</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="8">
+          <parametros>10111</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="9">
+          <parametros>11000</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="10">
+          <parametros>11001</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="11">
+          <parametros>11010</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="12">
+          <parametros>11011</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="13">
+          <parametros>11100</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="14">
+          <parametros>11101</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="15">
+          <parametros>11110</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="16">
+          <parametros>11111</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="17">
+          <parametros>00111</parametros>
+          <retorno>1</retorno>
+     </record>
+     <record num="18">
+          <parametros>01111</parametros>
+          <retorno>1</retorno>
+     </record>
+</csv_data_records>
+<!-- 18 records written -->
