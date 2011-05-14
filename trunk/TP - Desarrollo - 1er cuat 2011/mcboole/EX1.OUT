@@ -1,26 +1,35 @@
 /*
 
-McBOOLE : CPU time 0s, 48 nodes, var : in 7 out 5 literal : in 336 out 32
+McBOOLE : CPU time 0s, 48 nodes, var : in 7 out 5 literal : in 336 out 20
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 2 prime implicants
+McBOOLE : CPU time 0s, The function has 4 prime implicants
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 2 essential PI
+McBOOLE : CPU time 0s, The function has 4 essential PI
 */
 /*
 
-McBOOLE : CPU time 0s, The solution contains 2 nodes
+McBOOLE : CPU time 0s, The solution contains 4 nodes
 */
 /*
 
-McBOOLE : CPU time 0s, Final solution, literal : 10 input 7 output
+McBOOLE : CPU time 0s, Final solution, literal : 25 input 9 output
 */
-0x11000 01111
-0xxx101 10011
+1111000 00101
+0011000 00101
+00xx101 10011
+0x10000 01010
 /*
 
 McBOOLE : total CPU time 0, end, max branching depth reached : 0
 */
+
+La = 00xx101 = I'*Tmax'*Af*F1'*F2
+Lr = 0x10000 = I'*Tmin*R'*Af'*F1'*F2'
+M = 1111000 + 0011000 = I*Tmax*Tmin*R*Af'*F1'*F2'+I'*Tmax'*Tmin*R*Af'*F1'*F2'
+F1 = 00xx101 + 0x10000 = I'*Tmax'*Af*F1'*F2+I'*Tmin*R'*Af'*F1'*F2'
+F2 = 1111000 + 0011000 + 00xx101 = I*Tmax*Tmin*R*Af'*F1'*F2'+I'*Tmax'*Tmin*R*Af'*F1'*F2'+I'*Tmax'*Af*F1'*F2
+
