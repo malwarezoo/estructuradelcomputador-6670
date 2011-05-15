@@ -1,76 +1,196 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <csv_data_records source="C:\Users\Nono\Desktop\Estructura del computador\TP - Desarrollo - 1er cuat 2011\mcboole\EX1.IN.csv">
      <record num="1">
-          <parametros>10000</parametros>
-          <retorno>1</retorno>
+          <parametros>0011000</parametros>
+          <retorno>00101</retorno>
      </record>
      <record num="2">
-          <parametros>10001</parametros>
-          <retorno>1</retorno>
+          <parametros>0111000</parametros>
+          <retorno>00101</retorno>
      </record>
      <record num="3">
-          <parametros>10010</parametros>
-          <retorno>1</retorno>
+          <parametros>0100001</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="4">
-          <parametros>10011</parametros>
-          <retorno>1</retorno>
+          <parametros>0100101</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="5">
-          <parametros>10100</parametros>
-          <retorno>1</retorno>
+          <parametros>0101001</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="6">
-          <parametros>10101</parametros>
-          <retorno>1</retorno>
+          <parametros>0101101</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="7">
-          <parametros>10110</parametros>
-          <retorno>1</retorno>
+          <parametros>0110001</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="8">
-          <parametros>10111</parametros>
-          <retorno>1</retorno>
+          <parametros>0110101</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="9">
-          <parametros>11000</parametros>
-          <retorno>1</retorno>
+          <parametros>0111001</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="10">
-          <parametros>11001</parametros>
-          <retorno>1</retorno>
+          <parametros>0111101</parametros>
+          <retorno>00001</retorno>
      </record>
      <record num="11">
-          <parametros>11010</parametros>
-          <retorno>1</retorno>
+          <parametros>0000101</parametros>
+          <retorno>10010</retorno>
      </record>
      <record num="12">
-          <parametros>11011</parametros>
-          <retorno>1</retorno>
+          <parametros>0001101</parametros>
+          <retorno>10010</retorno>
      </record>
      <record num="13">
-          <parametros>11100</parametros>
-          <retorno>1</retorno>
+          <parametros>0010101</parametros>
+          <retorno>10010</retorno>
      </record>
      <record num="14">
-          <parametros>11101</parametros>
-          <retorno>1</retorno>
+          <parametros>0011101</parametros>
+          <retorno>10010</retorno>
      </record>
      <record num="15">
-          <parametros>11110</parametros>
-          <retorno>1</retorno>
+          <parametros>1000011</parametros>
+          <retorno>00011</retorno>
      </record>
      <record num="16">
-          <parametros>11111</parametros>
-          <retorno>1</retorno>
+          <parametros>1000111</parametros>
+          <retorno>00011</retorno>
      </record>
      <record num="17">
-          <parametros>00111</parametros>
-          <retorno>1</retorno>
+          <parametros>1001011</parametros>
+          <retorno>00011</retorno>
      </record>
      <record num="18">
-          <parametros>01111</parametros>
-          <retorno>1</retorno>
+          <parametros>1001111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="19">
+          <parametros>1010011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="20">
+          <parametros>1010111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="21">
+          <parametros>1011011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="22">
+          <parametros>1011111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="23">
+          <parametros>1100011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="24">
+          <parametros>1100111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="25">
+          <parametros>1101011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="26">
+          <parametros>1101111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="27">
+          <parametros>1110011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="28">
+          <parametros>1110111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="29">
+          <parametros>1111011</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="30">
+          <parametros>1111111</parametros>
+          <retorno>00011</retorno>
+     </record>
+     <record num="31">
+          <parametros>0010000</parametros>
+          <retorno>01010</retorno>
+     </record>
+     <record num="32">
+          <parametros>0110000</parametros>
+          <retorno>01010</retorno>
+     </record>
+     <record num="33">
+          <parametros>1000010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="34">
+          <parametros>1000110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="35">
+          <parametros>1001010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="36">
+          <parametros>1001110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="37">
+          <parametros>1010010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="38">
+          <parametros>1010110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="39">
+          <parametros>1011010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="40">
+          <parametros>1011110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="41">
+          <parametros>1100010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="42">
+          <parametros>1100110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="43">
+          <parametros>1101010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="44">
+          <parametros>1101110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="45">
+          <parametros>1110010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="46">
+          <parametros>1110110</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="47">
+          <parametros>1111010</parametros>
+          <retorno>00010</retorno>
+     </record>
+     <record num="48">
+          <parametros>1111110</parametros>
+          <retorno>00010</retorno>
      </record>
 </csv_data_records>
-<!-- 18 records written -->
+<!-- 48 records written -->
