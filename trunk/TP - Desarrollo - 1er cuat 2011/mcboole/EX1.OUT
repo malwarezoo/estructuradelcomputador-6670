@@ -45,5 +45,4 @@ T2 = I' Tmin R Af' FF1' FF2' + I FF1 FF2 + I' Tmax FF1' FF2
 McBOOLE : total CPU time 0, end, max branching depth reached : 0
 */
 
-I
  
