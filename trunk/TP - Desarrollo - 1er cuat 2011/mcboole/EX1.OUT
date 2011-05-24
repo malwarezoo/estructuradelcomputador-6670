@@ -1,39 +1,48 @@
 /*
 
-McBOOLE : CPU time 0s, 48 nodes, var : in 7 out 5 literal : in 336 out 72
+McBOOLE : CPU time 0s, 50 nodes, var : in 7 out 5 literal : in 350 out 74
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 7 prime implicants
+McBOOLE : CPU time 0s, The function has 8 prime implicants
 */
 /*
 
-McBOOLE : CPU time 0s, The function has 6 essential PI
+McBOOLE : CPU time 0s, The function has 7 essential PI
 */
 /*
 
-McBOOLE : CPU time 0s, The solution contains 6 nodes
+McBOOLE : CPU time 0s, The solution contains 7 nodes
 */
 /*
 
-McBOOLE : CPU time 0s, Final solution, literal : 26 input 9 output
-I	Tmax	Tmin	R	Af	FF1	FF2	| La	Lr	M	T1	T2
+McBOOLE : CPU time 0s, Final solution, literal : 31 input 10 output
+*/      La Lr M T1 T2
+0x10000 0  1  0 1  0
+xx11010 0  0  0 1  0
+0x11000 0  0  1 0  1
+1xxxx11 0  0  0 0  1
+01xxx01 0  0  0 0  1
+1xxxx1x 0  0  0 1  0
+00xx101 1  0  0 1  0
 
-*/
-0x10000 01010
-0x11000 00101
-1xxxx11 00001
-01xxx01 00001
-1xxxx1x 00010
-00xx101 10010
+La = 00xx101 = I' Tmax' Af FF1' FF2
+Lr = 0x10000 = I' Tmin R' Af' FF1' FF2'
+M  = 0x11000 = I' Tmin R Af' FF1' FF2'
+T1 = 0x10000 + xx11010 + 1xxxx1x + 00xx101 = Lr + xx11010 + 1xxxx1x + La = I' Tmin R' Af' FF1' FF2' + Tmin R Af' FF1 FF2' + I FF1 + I' Tmax' Af FF1' FF2
+T2 = 0x11000 + 1xxxx11 + 01xxx01 = M + 1xxxx11 + 01xxx01 = I' Tmin R Af' FF1' FF2' + I FF1 FF2 + I' Tmax FF1' FF2
 
-La = 00xx101 = I'*Tmax'*Af*FF1'*FF2
-Lr = 0x10000 = I'*Tmin*R'*Af'*FF1'*FF2'
-M = 0x11000 = I'*Tmin*R*Af'*FF1'*FF2'
-T1 = Lr + 1xxxx1x + La = I'*Tmin*R'*Af'*FF1'*FF2' + I*FF1 + I'*Tmax'*Af*FF1'*FF2
-T2 = M + 1xxxx11 + 01xxx01 = I'*Tmin*R*Af'*FF1'*FF2' + I*FF1*FF2 + I'*Tmax*FF1'*FF2
+La = I' Tmax' Af FF1' FF2
+Lr = I' Tmin R' Af' FF1' FF2'
+M  = I' Tmin R Af' FF1' FF2'
+
+T1 = I' Tmin R' Af' FF1' FF2' + Tmin R Af' FF1 FF2' + I FF1 + I' Tmax' Af FF1' FF2
+T2 = I' Tmin R Af' FF1' FF2' + I FF1 FF2 + I' Tmax FF1' FF2
+
 
 /*
 
 McBOOLE : total CPU time 0, end, max branching depth reached : 0
 */
+
+I
