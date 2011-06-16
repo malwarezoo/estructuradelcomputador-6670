@@ -34,8 +34,10 @@ grabar:
 	ld 		%r1,%r6    		!obtengo el contenido de r1 en r5		
 	jmpl 		%r15 + 4, %r0
 	
-	.org L1_start 			!empiezo L1 en la dirección L1_start	
-L1:	0xA0000003				!contenido de L1
-	.org L2_start
-L2:	0	
-		.end
+.org L1_start 			!empiezo L1 en la dirección L1_start	
+L1:	0xA0000003			!contenido de L1
+
+.org L2_start           !empiezo L1 en la dirección L1_start	
+L2:	0	                !contenido de L1
+
+.end
