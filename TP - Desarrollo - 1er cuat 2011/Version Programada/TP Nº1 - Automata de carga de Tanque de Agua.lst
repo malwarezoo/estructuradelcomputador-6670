@@ -1,0 +1,146 @@
+(ARCTools Version 2.1.2)
+ HexLoc     DecLoc    MachWord   Label        Instruction                Comment
+                                              .org 2048                  
+                                                                         
+00000800  0000002048            _00:                                     
+00000804  0000002052  c200291c                ld [2332], %r1             ! Cargar Input en memoria (%r1)
+                                                                         
+00000808  0000002056  c6002920                ld [2336], %r3             ! Evaluar si cumple con salida A
+0000080c  0000002060  86104003                or %r1, %r3, %r3           ! 
+00000810  0000002064  c800293c                ld [2364], %r4             ! 
+00000814  0000002068  8098c004                xorcc %r3, %r4, %r0        ! 
+00000818  0000002072  12800004                bne 4                      ! No cumple con salida A.  Evaluar salida G.
+0000081c  0000002076  d000295c                ld [2396], %r8             ! Configuro la salida S1 (Asociada a entrada A)
+00000820  0000002080  92002001                add %r0, 1, %r9            ! Logueo el estado al que salto.
+00000824  0000002084  1080000a                ba 10                      ! Salto al estado 1
+00000828  0000002088            Eval_E_G:                                
+0000082c  0000002092  c6002938                ld [2360], %r3             ! Evaluar si cumple con salida G
+00000830  0000002096  86104003                or %r1, %r3, %r3           ! 
+00000834  0000002100  c8002954                ld [2388], %r4             ! 
+00000838  0000002104  8098c004                xorcc %r3, %r4, %r0        ! 
+0000083c  0000002108  12bffff1                bne -15                    ! Ejecuto nuevamente el ciclo.
+00000840  0000002112  d0002960                ld [2400], %r8             ! Configuro la salida S2 (Asociada a la entrada G)
+00000844  0000002116  92002002                add %r0, 2, %r9            ! Logueo el estado al que salto
+00000848  0000002120  10800018                ba 24                      ! Salto al estado 2
+                                                                         
+0000084c  0000002124            _01:                                     
+00000850  0000002128  19000011                sethi 17, %r12             !%R12 <- TiempoFuncionamientoMax							
+00000854  0000002132  980323d6                add %r12, -14378, %r12     
+00000858  0000002136  9a00200f                add %r0, 15, %r13          
+                                                                         
+0000085c  0000002140            _do:                                     
+                                                                         
+00000860  0000002144  c200291c                ld [2332], %r1             ! Cargar Input en memoria (%r1)
+                                                                         
+00000864  0000002148  c6002924                ld [2340], %r3             ! Evaluar si cumple con salida B
+00000868  0000002152  86104003                or %r1, %r3, %r3           ! 
+0000086c  0000002156  c8002940                ld [2368], %r4             ! 
+00000870  0000002160  8098c004                xorcc %r3, %r4, %r0        ! 
+00000874  0000002164  12800004                bne 4                      ! No cumple con salida B.  Evaluar salida Timmer.
+00000878  0000002168  d0002958                ld [2392], %r8             ! Configuro la salida S0 (Asociada a entrada B)
+0000087c  0000002172  92002000                add %r0, 0, %r9            ! Logueo el estado al que salto.
+00000880  0000002176  10bfffe0                ba -32                     ! Salto al estado 0
+00000884  0000002180            Timmer:                                  
+00000888  0000002184  98a3000d                subcc %r12, %r13, %r12     ! Decremento el contador de tiempo
+0000088c  0000002188  0c800002                bneg 2                     
+00000890  0000002192  10bffff3                ba -13                     
+00000894  0000002196            TimeOut:                                 ! La bomba funciono por mas tiempo del que debia.
+00000898  0000002200  d0002964                ld [2404], %r8             ! Configuro la salida S3
+0000089c  0000002204  92002003                add %r0, 3, %r9            ! Logueo el estado al que salto
+000008a0  0000002208  ffffffff                halt                       
+000008a4  0000002212  10800014                ba 20                      ! Salto al estado 3
+                                                                         
+000008a8  0000002216            _10:                                     
+000008ac  0000002220  c200291c                ld [2332], %r1             ! Cargar Input en memoria (%r1)
+                                                                         
+000008b0  0000002224  c6002930                ld [2352], %r3             ! Evaluar si cumple con salida E
+000008b4  0000002228  86104003                or %r1, %r3, %r3           ! 
+000008b8  0000002232  c800294c                ld [2380], %r4             ! 
+000008bc  0000002236  8098c004                xorcc %r3, %r4, %r0        ! 
+000008c0  0000002240  12800004                bne 4                      ! No cumple con salida E.  Evaluar salida F.
+000008c4  0000002244  d0002958                ld [2392], %r8             ! Configuro la salida SO (Asociada a entrada E)
+000008c8  0000002248  92002000                add %r0, 0, %r9            ! Logueo el estado al que salto.
+000008cc  0000002252  10bfffcd                ba -51                     ! Salto al estado 0
+000008d0  0000002256            Eval_E_F:                                
+000008d4  0000002260  c6002934                ld [2356], %r3             ! Evaluar si cumple con salida F
+000008d8  0000002264  86104003                or %r1, %r3, %r3           ! 
+000008dc  0000002268  c8002950                ld [2384], %r4             ! 
+000008e0  0000002272  8098c004                xorcc %r3, %r4, %r0        ! 
+000008e4  0000002276  12bffff1                bne -15                    ! Ejecuto nuevamente el ciclo.
+000008e8  0000002280  d0002958                ld [2392], %r8             ! Configuro la salida S0 (Asociada a la entrada F)
+000008ec  0000002284  92002000                add %r0, 0, %r9            ! Logueo el estado al que salto
+000008f0  0000002288  10bfffc4                ba -60                     ! Salto al estado 0
+                                                                         
+000008f4  0000002292            _11:                                     
+000008f8  0000002296  c200291c                ld [2332], %r1             ! Cargar Input en memoria (%r1)
+                                                                         
+000008fc  0000002300  c6002928                ld [2344], %r3             ! Evaluar si cumple con salida C
+00000900  0000002304  86104003                or %r1, %r3, %r3           ! 
+00000904  0000002308  c8002944                ld [2372], %r4             ! 
+00000908  0000002312  8098c004                xorcc %r3, %r4, %r0        ! 
+0000090c  0000002316  12bffffa                bne -6                     ! Ejecuto nuevamente el ciclo.
+00000910  0000002320  d0002958                ld [2392], %r8             ! Configuro la salida SO (Asociada a entrada C)
+00000914  0000002324  92002000                add %r0, 0, %r9            ! Logueo el estado al que salto.
+00000918  0000002328  10bfffba                ba -70                     ! Salto al estado 0
+                                                                         
+                                                                         !Entradas
+                                                                         
+0000091c  0000002332  00000003  Input:                                   !Reemplazar X por la entrada necesaria.
+                                                                         
+                                                                         !Mascara de entradas.
+                                                                         
+00000920  0000002336  00000004  A_Mask:                                  
+00000924  0000002340  00000003  B_Mask:                                  
+00000928  0000002344  00000007  C_Mask:                                  
+0000092c  0000002348  00000004  D_Mask:                                  
+00000930  0000002352  00000007  E_Mask:                                  
+00000934  0000002356  00000004  F_Mask:                                  
+00000938  0000002360  00000003  G_Mask:                                  
+                                                                         
+                                                                         !Transicion ID
+                                                                         
+0000093c  0000002364  00000007  A_ID:                                    
+00000940  0000002368  00000007  B_ID:                                    
+00000944  0000002372  0000000f  C_ID:                                    
+00000948  0000002376  00000006  D_ID:                                    
+0000094c  0000002380  0000000f  E_ID:                                    
+00000950  0000002384  00000007  F_ID:                                    
+00000954  0000002388  00000003  G_ID:                                    
+                                                                         
+                                                                         !Salidas
+                                                                         
+00000958  0000002392  00000000  S0:                                      
+0000095c  0000002396  00000001  S1:                                      
+00000960  0000002400  00000002  S2:                                      
+00000964  0000002404  00000004  S3:                                      
+                                                                         
+
+--- Symbol Table ---
+B_Mask: 2340
+D_ID: 2376
+S3: 2404
+C_Mask: 2344
+S2: 2400
+_11: 2292
+S1: 2396
+_10: 2216
+S0: 2392
+E_ID: 2380
+_do: 2140
+TimeOut: 2196
+D_Mask: 2348
+F_ID: 2384
+E_Mask: 2352
+Timmer: 2180
+Eval_E_G: 2088
+Eval_E_F: 2256
+G_ID: 2388
+F_Mask: 2356
+A_ID: 2364
+G_Mask: 2360
+Input: 2332
+B_ID: 2368
+_01: 2124
+_00: 2048
+A_Mask: 2336
+C_ID: 2372
