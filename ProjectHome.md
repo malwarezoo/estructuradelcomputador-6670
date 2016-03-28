@@ -1,0 +1,1 @@
+El presente proyecto engloba toda la información relacionada con la cursada de la materia Estructura del computador durante el 2do cuatrimestre de 2010.  Incluye el desarrollo del trabajo práctico inclusive.
